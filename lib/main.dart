@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import './screens/auth_screen.dart';
 import './screens/tabs_screen.dart';
 import './screens/add_camp_screen.dart';
+import './screens/edit_camp_screen.dart';
 import './screens/favourites_screen.dart';
 import './screens/your_listings.dart';
 import './providers/places.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           AuthScreen.routeName : (ctx) => AuthScreen(),
           TabsScreen.routeName : (ctx) => TabsScreen(),
           AddCampScreen.routeName : (ctx) => AddCampScreen(),
+          EditCampScreen.routeName : (ctx) => EditCampScreen(),
           FavouritesScreen.routeName : (ctx) => FavouritesScreen(),
           YourListings.routeName : (ctx) => YourListings(),
         }

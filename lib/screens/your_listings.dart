@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:campsurf/screens/tabs_screen.dart';
 
+import 'edit_camp_screen.dart';
+
 class YourListings extends StatefulWidget {
   static const routeName = '/yourPosts';
   @override
@@ -104,7 +106,9 @@ class _YourListingsState extends State<YourListings> {
                         Icons.edit_outlined,
                         color: Theme.of(context).accentColor,
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushNamed(EditCampScreen.routeName);
+                      },
                     ),
                   ),
                 ),
