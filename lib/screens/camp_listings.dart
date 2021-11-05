@@ -1,3 +1,4 @@
+import 'package:campsurf/screens/camp_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class CampListings extends StatefulWidget {
@@ -85,7 +86,9 @@ class _CampListingsState extends State<CampListings> {
                       subtitle: Text(
                         'Location ${i+1}',
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushNamed(CampDetails.routeName);
+                      },
                     ),
                   ),
                 ),

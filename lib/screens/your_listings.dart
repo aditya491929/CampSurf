@@ -102,9 +102,12 @@ class _YourListingsState extends State<YourListings> {
                       subtitle: Text(
                         'Location ${i + 1}',
                       ),
-                      trailing: Icon(
-                        Icons.edit_outlined,
+                      trailing: IconButton(
+                        icon: Icon(Icons.edit_outlined),
                         color: Theme.of(context).accentColor,
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(EditCampScreen.routeName);
+                        },
                       ),
                       onTap: () {
                         Navigator.of(context).pushNamed(EditCampScreen.routeName);
