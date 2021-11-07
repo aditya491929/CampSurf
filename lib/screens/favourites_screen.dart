@@ -1,5 +1,6 @@
-import 'package:campsurf/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
+import './tabs_screen.dart';
+import './camp_detail_screen.dart';
 
 class FavouritesScreen extends StatefulWidget {
   static const routeName = '/favouriteCamps';
@@ -62,10 +63,10 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
         child: Column(
           children: [
             Text(
-              'Favourite Camps',
+              '🎖 Favourite Camps',
               style: TextStyle(
                 fontSize: 27,
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w600,
               ),
             ),
             SizedBox(
@@ -104,7 +105,9 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                         Icons.favorite,
                         color: Theme.of(context).accentColor,
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushNamed(CampDetail.routeName);
+                      },
                     ),
                   ),
                 ),

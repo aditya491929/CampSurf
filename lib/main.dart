@@ -6,7 +6,10 @@ import './screens/tabs_screen.dart';
 import './screens/add_camp_screen.dart';
 import './screens/favourites_screen.dart';
 import './screens/your_listings.dart';
+import './screens/edit_screen.dart';
+import './screens/camp_detail_screen.dart';
 import './providers/places.dart';
+import './helpers/custom_transition.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,6 +28,11 @@ class MyApp extends StatelessWidget {
           textTheme: TextTheme(
             button: TextStyle(color: Colors.white),
           ),
+          pageTransitionsTheme: PageTransitionsTheme(
+            builders: {
+              TargetPlatform.android: CustomPageTransitionBuilder(),
+            }
+          ),
         ),
         // home: AuthScreen(),
         debugShowCheckedModeBanner: false,
@@ -35,6 +43,8 @@ class MyApp extends StatelessWidget {
           AddCampScreen.routeName : (ctx) => AddCampScreen(),
           FavouritesScreen.routeName : (ctx) => FavouritesScreen(),
           YourListings.routeName : (ctx) => YourListings(),
+          EditScreen.routeName : (ctx) => EditScreen(),
+          CampDetail.routeName : (ctx) => CampDetail(),
         }
       ),
     );
