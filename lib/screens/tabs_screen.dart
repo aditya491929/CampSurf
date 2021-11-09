@@ -85,6 +85,7 @@ class _TabsScreenState extends State<TabsScreen> {
         ),
         drawer: MainDrawer(),
         body: TabBarView(
+          physics: BouncingScrollPhysics(),
           children: [CampListings(), MapScreen()],
         ),
         floatingActionButton: Visibility(

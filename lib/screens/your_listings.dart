@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:campsurf/screens/tabs_screen.dart';
-
-import 'edit_camp_screen.dart';
+import './tabs_screen.dart';
+import './edit_screen.dart';
+import './camp_detail_screen.dart';
 
 class YourListings extends StatefulWidget {
   static const routeName = '/yourPosts';
@@ -64,10 +64,10 @@ class _YourListingsState extends State<YourListings> {
         child: Column(
           children: [
             Text(
-              'Listed Camps',
+              '📃 Listed Camps',
               style: TextStyle(
                 fontSize: 27,
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w600,
               ),
             ),
             SizedBox(
@@ -103,14 +103,16 @@ class _YourListingsState extends State<YourListings> {
                         'Location ${i + 1}',
                       ),
                       trailing: IconButton(
-                        icon: Icon(Icons.edit_outlined),
-                        color: Theme.of(context).accentColor,
                         onPressed: () {
-                          Navigator.of(context).pushNamed(EditCampScreen.routeName);
+                          Navigator.of(context).pushNamed(EditScreen.routeName);
                         },
+                        icon: Icon(
+                          Icons.edit_outlined,
+                          color: Theme.of(context).accentColor,
+                        ),
                       ),
                       onTap: () {
-                        Navigator.of(context).pushNamed(EditCampScreen.routeName);
+                        Navigator.of(context).pushNamed(CampDetail.routeName);
                       },
                     ),
                   ),

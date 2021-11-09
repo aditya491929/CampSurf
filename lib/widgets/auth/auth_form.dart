@@ -1,16 +1,15 @@
-import 'package:campsurf/screens/camp_listings.dart';
-import 'package:campsurf/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
-  // AuthForm(this.submitFn, this.isLoading);
-  // final void Function(
-  //   String email,
-  //   String password,
-  //   String username,
-  //   bool isLogin,
-  // ) submitFn;
-  AuthForm(this.isLoading); // temporary
+  AuthForm(this.submitFn,this.isLoading);
+  
+  final void Function(
+    String email,
+    String password,
+    String username,
+    bool isLogin,
+  ) submitFn;
+  
   final bool isLoading;
 
   @override
@@ -24,6 +23,25 @@ class _AuthFormState extends State<AuthForm> {
   var _userEmail = '';
   var _userName = '';
   var _userPassword = '';
+
+  void _trySubmit() {
+    final isValid = _formKey.currentState!.validate();
+    FocusScope.of(context).unfocus();
+
+    if (isValid) {
+      _formKey.currentState!.save();
+      // print(_userEmail);
+      // print(_userName);
+      // print(_userPassword);
+      widget.submitFn(
+        _userEmail.trim(),
+        _userPassword.trim(), 
+        _userName.trim(),
+        _isLogin,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -298,10 +316,7 @@ class _AuthFormState extends State<AuthForm> {
                         ),
                       if (!widget.isLoading)
                         ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pushNamed(TabsScreen.routeName);
-                          },
+                          onPressed: _trySubmit,
                           child: Padding(
                             padding: const EdgeInsets.all(10),
                             child: Text(
