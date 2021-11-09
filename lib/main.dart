@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import './screens/auth_screen.dart';
 import './screens/tabs_screen.dart';
 import './screens/add_camp_screen.dart';
-import './screens/edit_camp_screen.dart';
 import './screens/favourites_screen.dart';
 import './screens/your_listings.dart';
 import './screens/edit_screen.dart';
@@ -52,7 +51,6 @@ class MyApp extends StatelessWidget {
         routes: {
           TabsScreen.routeName : (ctx) => TabsScreen(),
           AddCampScreen.routeName : (ctx) => AddCampScreen(),
-          EditCampScreen.routeName : (ctx) => EditCampScreen(),
           FavouritesScreen.routeName : (ctx) => FavouritesScreen(),
           YourListings.routeName : (ctx) => YourListings(),
           EditScreen.routeName : (ctx) => EditScreen(),

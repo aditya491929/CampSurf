@@ -3,8 +3,6 @@ import './tabs_screen.dart';
 import './edit_screen.dart';
 import './camp_detail_screen.dart';
 
-import 'edit_camp_screen.dart';
-
 class YourListings extends StatefulWidget {
   static const routeName = '/yourPosts';
   @override
