@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MainDrawer extends StatelessWidget {
-
   Widget buildListTile(String title, IconData icon, VoidCallback tapHandler) {
     return ListTile(
       leading: Icon(
@@ -66,7 +66,8 @@ class MainDrawer extends StatelessWidget {
             color: Colors.grey,
           ),
           buildListTile('Logout', Icons.logout_outlined, () {
-            Navigator.of(context).pushReplacementNamed('/');
+            // Navigator.of(context).pushReplacementNamed('/');
+            FirebaseAuth.instance.signOut();
           }),
           Divider(
             color: Colors.grey,

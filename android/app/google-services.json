@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "107214445433",
+    "project_id": "campsurf-6eb1d",
+    "storage_bucket": "campsurf-6eb1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:107214445433:android:1bdb77a23f4ccf1079ada8",
+        "android_client_info": {
+          "package_name": "com.example.campsurf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "107214445433-87djvua8t5aqguganh92udianc0tdfvr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrGu3oJX4Wk7Sw3_H-3s2via877-ZBUKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "107214445433-87djvua8t5aqguganh92udianc0tdfvr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

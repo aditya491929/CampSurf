@@ -72,15 +72,14 @@ class _AddCampScreenState extends State<AddCampScreen> {
                   child: Column(
                     children: [
                       Text(
-                        'Add New CampGround',
+                        'Add New CampGround 🏕️',
                         style: TextStyle(
                           fontSize: 27,
-                          fontWeight: FontWeight.w400,
-                          color: Theme.of(context).accentColor,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 30,
                       ),
                       TextField(
                         decoration: InputDecoration(
@@ -140,7 +139,7 @@ class _AddCampScreenState extends State<AddCampScreen> {
           onPressed: () {},
           icon: Icon(Icons.add),
           label: Text(
-            "Add to cart",
+            "Add CampGround",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
