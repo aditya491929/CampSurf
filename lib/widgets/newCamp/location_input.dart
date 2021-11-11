@@ -1,3 +1,5 @@
+import 'package:campsurf/screens/location_screen.dart';
+import 'package:campsurf/screens/map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:latlong2/latlong.dart' as latLng;
@@ -37,6 +39,26 @@ class _LocationInputState extends State<LocationInput> {
     } catch (err) {
       return;
     }
+  }
+
+  Future<void> _selectOnMap() async {
+    final selectedLocation = await Navigator.of(context).push<latLng.LatLng>(
+      MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (ctx) => LocationScreen(
+          isSelecting: true,
+        ),
+      ),
+    );
+    if (selectedLocation == null) {
+      return;
+    }
+    _showPreview(selectedLocation.latitude, selectedLocation.longitude);
+    widget.onSelectPlace(
+      selectedLocation.latitude,
+      selectedLocation.longitude,
+    );
+    print(selectedLocation.latitude.toString() + ' ' + selectedLocation.longitude.toString());
   }
 
   @override
@@ -91,8 +113,7 @@ class _LocationInputState extends State<LocationInput> {
               ),
             ),
             TextButton.icon(
-              // onPressed: _selectOnMap,
-              onPressed: () {},
+              onPressed: _selectOnMap,
               icon: Icon(
                 Icons.add_location_alt_outlined,
                 color: Colors.amber,
