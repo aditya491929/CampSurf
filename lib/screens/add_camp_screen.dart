@@ -85,7 +85,7 @@ class _AddCampScreenState extends State<AddCampScreen> {
                         decoration: InputDecoration(
                           labelText: 'Title',
                           labelStyle: TextStyle(
-                            color: Colors.white, 
+                            color: Colors.white,
                             fontSize: 20,
                           ),
                           enabledBorder: OutlineInputBorder(
@@ -104,6 +104,7 @@ class _AddCampScreenState extends State<AddCampScreen> {
                           ),
                         ),
                         // controller: _titleController,
+                        textInputAction: TextInputAction.next,
                         cursorHeight: 29,
                         cursorColor: Theme.of(context).accentColor,
                         style: TextStyle(
@@ -115,6 +116,74 @@ class _AddCampScreenState extends State<AddCampScreen> {
                       ),
                       // ImageInput(_selectImage),
                       ImageInput(),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Price',
+                          labelStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              width: 2,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: Theme.of(context).accentColor,
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                        // controller: _titleController,
+                        textInputAction: TextInputAction.next,
+                        cursorHeight: 29,
+                        cursorColor: Theme.of(context).accentColor,
+                        keyboardType: TextInputType.number,
+                        style: TextStyle(
+                          fontSize: 23,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextField(
+                        maxLines: 5,
+                        decoration: InputDecoration(
+                          labelText: 'Description',
+                          labelStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              width: 2,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: Theme.of(context).accentColor,
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                        // controller: _titleController,
+                        textInputAction: TextInputAction.next,
+                        cursorHeight: 29,
+                        cursorColor: Theme.of(context).accentColor,
+                        style: TextStyle(
+                          fontSize: 23,
+                        ),
+                      ),
                       SizedBox(
                         height: 20,
                       ),

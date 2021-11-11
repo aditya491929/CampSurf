@@ -14,14 +14,14 @@ class _EditScreenState extends State<EditScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: Icon(
-              Icons.close, 
-              size: 30,
-            ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.close,
+            size: 30,
           ),
+        ),
         centerTitle: true,
         title: Text('Edit Campground'),
         actions: [
@@ -73,6 +73,7 @@ class _EditScreenState extends State<EditScreen> {
                         ),
                       ),
                       // controller: _titleController,
+                      textInputAction: TextInputAction.next,
                       cursorHeight: 29,
                       cursorColor: Theme.of(context).accentColor,
                       style: TextStyle(
@@ -84,6 +85,74 @@ class _EditScreenState extends State<EditScreen> {
                     ),
                     // ImageInput(_selectImage),
                     ImageInput(),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Price',
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                            width: 2,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Theme.of(context).accentColor,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                      // controller: _titleController,
+                      textInputAction: TextInputAction.next,
+                      cursorHeight: 29,
+                      cursorColor: Theme.of(context).accentColor,
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(
+                        fontSize: 23,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      maxLines: 5,
+                      decoration: InputDecoration(
+                        labelText: 'Description',
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                            width: 2,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Theme.of(context).accentColor,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                      // controller: _titleController,
+                      textInputAction: TextInputAction.next,
+                      cursorHeight: 29,
+                      cursorColor: Theme.of(context).accentColor,
+                      style: TextStyle(
+                        fontSize: 23,
+                      ),
+                    ),
                     SizedBox(
                       height: 20,
                     ),
