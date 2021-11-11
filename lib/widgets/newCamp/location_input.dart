@@ -1,12 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
+import 'package:latlong2/latlong.dart' as latLng;
+
+import '../../helpers/location_helper.dart';
 
 class LocationInput extends StatefulWidget {
+  final Function onSelectPlace = () {};
+
+  // LocationInput(this.onSelectPlace);
   @override
   _LocationInputState createState() => _LocationInputState();
 }
 
 class _LocationInputState extends State<LocationInput> {
   var _previewImageUrl = null;
+
+  void _showPreview(double? lat, double? lng) {
+    final staticMapUrl = LocationHelper.generateLocationPreviewImage(
+      latitude: lat,
+      longitude: lng,
+    );
+    setState(() {
+      _previewImageUrl = staticMapUrl;
+    });
+  }
+
+  Future<void> _getCurrentUserLocation() async {
+    try {
+      final locData = await Location().getLocation();
+      print(locData.latitude.toString() + ' ' + locData.longitude.toString());
+      _showPreview(locData.latitude, locData.longitude);
+      widget.onSelectPlace(
+        locData.latitude,
+        locData.longitude,
+      );
+    } catch (err) {
+      return;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -44,8 +76,7 @@ class _LocationInputState extends State<LocationInput> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             TextButton.icon(
-              // onPressed: _getCurrentUserLocation,
-              onPressed: () {},
+              onPressed: _getCurrentUserLocation,
               icon: Icon(
                 Icons.my_location_outlined,
                 color: Colors.amber,
