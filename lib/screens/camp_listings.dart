@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './camp_detail_screen.dart';
+import './search_modal.dart';
 
 class CampListings extends StatefulWidget {
   @override
@@ -7,6 +8,20 @@ class CampListings extends StatefulWidget {
 }
 
 class _CampListingsState extends State<CampListings> {
+  void _search(BuildContext cotext) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      isDismissible: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(10),),
+      ),
+      context: context,
+      builder: (bCtx) {
+        return SearchModal();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -20,39 +35,59 @@ class _CampListingsState extends State<CampListings> {
         padding: const EdgeInsets.only(left: 5, right: 5, top: 10),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              child: TextField(
-                onChanged: (val) {},
-                cursorColor: Colors.white,
-                cursorHeight: 28,
-                textAlignVertical: TextAlignVertical.center,
-                style: TextStyle(
-                  fontSize: 25,
+            GestureDetector(
+              onTap: () {
+                _search(context);
+              },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 2, color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                decoration: InputDecoration(
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  hintText: 'Search 🔍',
-                  hintStyle: TextStyle(
+                // child: TextField(
+                //   onChanged: (val) {},
+                //   cursorColor: Colors.white,
+                //   cursorHeight: 28,
+                //   textAlignVertical: TextAlignVertical.center,
+                //   style: TextStyle(
+                //     fontSize: 25,
+                //   ),
+                //   decoration: InputDecoration(
+                //     contentPadding:
+                //         const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                //     hintText: 'Search 🔍',
+                //     hintStyle: TextStyle(
+                //       color: Colors.white70,
+                //       fontSize: 25,
+                //     ),
+                //     focusedBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(10),
+                //       borderSide: BorderSide(
+                //         width: 2,
+                //         color: Theme.of(context).accentColor,
+                //         style: BorderStyle.solid,
+                //       ),
+                //     ),
+                //     enabledBorder: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(10),
+                //       borderSide: BorderSide(
+                //         width: 1,
+                //         color: Colors.white,
+                //         style: BorderStyle.solid,
+                //       ),
+                //     ),
+                //   ),
+                // ),
+                child: Text(
+                  'Search 🔍',
+                  style: TextStyle(
                     color: Colors.white70,
                     fontSize: 25,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      width: 2,
-                      color: Theme.of(context).accentColor,
-                      style: BorderStyle.solid,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      width: 1,
-                      color: Colors.white,
-                      style: BorderStyle.solid,
-                    ),
                   ),
                 ),
               ),
