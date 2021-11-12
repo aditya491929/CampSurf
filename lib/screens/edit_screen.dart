@@ -83,11 +83,6 @@ class _EditScreenState extends State<EditScreen> {
                     SizedBox(
                       height: 20,
                     ),
-                    // ImageInput(_selectImage),
-                    ImageInput(),
-                    SizedBox(
-                      height: 20,
-                    ),
                     TextField(
                       decoration: InputDecoration(
                         labelText: 'Price',
@@ -155,11 +150,6 @@ class _EditScreenState extends State<EditScreen> {
                     ),
                     SizedBox(
                       height: 20,
-                    ),
-                    // LocationInput(_selectPlace),
-                    LocationInput(),
-                    SizedBox(
-                      height: 60,
                     ),
                   ],
                 ),
