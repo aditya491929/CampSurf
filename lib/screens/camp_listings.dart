@@ -8,19 +8,6 @@ class CampListings extends StatefulWidget {
 }
 
 class _CampListingsState extends State<CampListings> {
-  // void _search(BuildContext cotext) {
-  //   showModalBottomSheet(
-  //     isScrollControlled: true,
-  //     isDismissible: true,
-  //     shape: RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.vertical(top: Radius.circular(10),),
-  //     ),
-  //     context: context,
-  //     builder: (bCtx) {
-  //       return SearchModal(query: '',);
-  //     },
-  //   );
-  // }
 
   _renderShowModal(String query){
     return showModalBottomSheet<void>(
@@ -31,11 +18,59 @@ class _CampListingsState extends State<CampListings> {
       ),
       context: context,
       builder: (BuildContext context) {
-        // return ValueListenableBuilder(
-        //   // valueListenable: titleController,
-        //   builder: (context, _content, child) {
-            return SearchModal(query: query);
-      //     });
+
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.89,
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: 5,
+                width: 55,
+                margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).accentColor,
+                  borderRadius: BorderRadius.circular(10)
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+                child: Text(
+                  'Resuts for "' + query + '"',
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Expanded(
+                child: SizedBox(
+                  // height: MediaQuery.of(context).size.height,// * 0.65,
+                  child: SearchModal(query: query),
+                ),
+              ),
+            ],
+          )
+        );
+
+        // return Container(
+        //   height: MediaQuery.of(context).size.height * 0.65,
+        //   child: Column(
+        //     children: [
+        //       Container(
+        //         height: 5,
+        //         width: 55,
+        //         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
+        //         decoration: BoxDecoration(
+        //           color: Theme.of(context).accentColor,
+        //           borderRadius: BorderRadius.circular(10)
+        //         ),
+        //       ),
+        //       SearchModal(query: query)
+        //     ],
+        //   )
+        // );
+
       },
     );
   }

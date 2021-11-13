@@ -15,8 +15,8 @@ class _SearchModalState extends State<SearchModal> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
-        height: MediaQuery.of(context).size.height * 0.65,
+        padding: const EdgeInsets.only(left: 5, right: 5),
+        // height: MediaQuery.of(context).size.height * 0.65,
         // child: Column(
         //   children: [
         //     Container(
@@ -30,6 +30,7 @@ class _SearchModalState extends State<SearchModal> {
         //     ),
         //   ],
         // ),
+        
         child: ListView.builder(
           physics: BouncingScrollPhysics(),
           itemCount: 10,
