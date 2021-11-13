@@ -1,5 +1,4 @@
 import 'package:campsurf/screens/location_screen.dart';
-import 'package:campsurf/screens/map_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:latlong2/latlong.dart' as latLng;
@@ -15,7 +14,7 @@ class LocationInput extends StatefulWidget {
 }
 
 class _LocationInputState extends State<LocationInput> {
-  var _previewImageUrl = null;
+  var _previewImageUrl;
 
   void _showPreview(double? lat, double? lng) {
     final staticMapUrl = LocationHelper.generateLocationPreviewImage(

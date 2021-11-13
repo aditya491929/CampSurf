@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/newCamp/image_input.dart';
-import '../widgets/newCamp/location_input.dart';
+
 
 class EditScreen extends StatefulWidget {
   static const routeName = '/editCamp';
