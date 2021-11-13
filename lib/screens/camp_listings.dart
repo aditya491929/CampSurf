@@ -9,7 +9,7 @@ class CampListings extends StatefulWidget {
 
 class _CampListingsState extends State<CampListings> {
 
-  _renderShowModal(String query){
+  _renderShowModal(){
     return showModalBottomSheet<void>(
       isScrollControlled: true,
       isDismissible: true,
@@ -20,7 +20,7 @@ class _CampListingsState extends State<CampListings> {
       builder: (BuildContext context) {
 
         return Container(
-          height: MediaQuery.of(context).size.height * 0.89,
+          height: MediaQuery.of(context).size.height,// * 0.89,
           child: Column(
             children: <Widget>[
               Container(
@@ -32,45 +32,15 @@ class _CampListingsState extends State<CampListings> {
                   borderRadius: BorderRadius.circular(10)
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-                child: Text(
-                  'Resuts for "' + query + '"',
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.white,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
               Expanded(
                 child: SizedBox(
                   // height: MediaQuery.of(context).size.height,// * 0.65,
-                  child: SearchModal(query: query),
+                  child: SearchModal(),
                 ),
               ),
             ],
           )
         );
-
-        // return Container(
-        //   height: MediaQuery.of(context).size.height * 0.65,
-        //   child: Column(
-        //     children: [
-        //       Container(
-        //         height: 5,
-        //         width: 55,
-        //         margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
-        //         decoration: BoxDecoration(
-        //           color: Theme.of(context).accentColor,
-        //           borderRadius: BorderRadius.circular(10)
-        //         ),
-        //       ),
-        //       SearchModal(query: query)
-        //     ],
-        //   )
-        // );
-
       },
     );
   }
@@ -89,65 +59,26 @@ class _CampListingsState extends State<CampListings> {
         child: Column(
           children: [
             GestureDetector(
-              // onTap: () {
-              //   _search(context);
-              // },
+              onTap: () {
+                _renderShowModal();
+              },
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                // margin:
-                //     const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                 width: double.infinity,
-                // decoration: BoxDecoration(
-                //   border: Border.all(width: 2, color: Colors.grey),
-                //   borderRadius: BorderRadius.circular(10),
-                // ),
-                child: TextField(
-                  // onChanged: (val) {},
-                  cursorColor: Colors.white,
-                  cursorHeight: 28,
-                  textAlignVertical: TextAlignVertical.center,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 2, color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  'Search 🔍',
                   style: TextStyle(
+                    color: Colors.white70,
                     fontSize: 25,
                   ),
-                  decoration: InputDecoration(
-                    contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    hintText: 'Search 🔍',
-                    hintStyle: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 25,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: Theme.of(context).accentColor,
-                        style: BorderStyle.solid,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        width: 1,
-                        color: Colors.white,
-                        style: BorderStyle.solid,
-                      ),
-                    ),
-                  ),
-                  onSubmitted: (query) => {
-                    // print("the query is: " + query),
-                    _renderShowModal(query)
-                    // _search(context)
-                  },
                 ),
-                // child: Text(
-                //   'Search 🔍',
-                //   style: TextStyle(
-                //     color: Colors.white70,
-                //     fontSize: 25,
-                //   ),
-                // ),
               ),
             ),
             SizedBox(
