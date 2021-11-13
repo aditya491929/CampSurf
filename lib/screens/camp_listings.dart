@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import './camp_detail_screen.dart';
-import './search_modal.dart';
 
 class CampListings extends StatefulWidget {
   @override
@@ -8,42 +7,6 @@ class CampListings extends StatefulWidget {
 }
 
 class _CampListingsState extends State<CampListings> {
-
-  _renderShowModal(){
-    return showModalBottomSheet<void>(
-      isScrollControlled: true,
-      isDismissible: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(10),),
-      ),
-      context: context,
-      builder: (BuildContext context) {
-
-        return Container(
-          height: MediaQuery.of(context).size.height,// * 0.89,
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: 5,
-                width: 55,
-                margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
-                  borderRadius: BorderRadius.circular(10)
-                ),
-              ),
-              Expanded(
-                child: SizedBox(
-                  // height: MediaQuery.of(context).size.height,// * 0.65,
-                  child: SearchModal(),
-                ),
-              ),
-            ],
-          )
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,29 +21,29 @@ class _CampListingsState extends State<CampListings> {
         padding: const EdgeInsets.only(left: 5, right: 5, top: 10),
         child: Column(
           children: [
-            GestureDetector(
-              onTap: () {
-                _renderShowModal();
-              },
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                margin:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 2, color: Colors.grey),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  'Search 🔍',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 25,
-                  ),
-                ),
-              ),
-            ),
+            // GestureDetector(
+            //   onTap: () {
+            //     _renderShowModal();
+            //   },
+            //   child: Container(
+            //     padding:
+            //         const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+            //     margin:
+            //         const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+            //     width: double.infinity,
+            //     decoration: BoxDecoration(
+            //       border: Border.all(width: 2, color: Colors.grey),
+            //       borderRadius: BorderRadius.circular(10),
+            //     ),
+            //     child: Text(
+            //       'Search 🔍',
+            //       style: TextStyle(
+            //         color: Colors.white70,
+            //         fontSize: 25,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             SizedBox(
               height: 5,
             ),

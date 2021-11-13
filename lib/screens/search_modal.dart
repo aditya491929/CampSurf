@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './camp_detail_screen.dart';
+
 
 class SearchModal extends StatefulWidget {
 
@@ -15,19 +17,14 @@ class _SearchModalState extends State<SearchModal> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        // height: MediaQuery.of(context).size.height,
         child: Column(
           children: <Widget>[
             Container(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 16),
               // margin:
               //     const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
               width: double.infinity,
-              // decoration: BoxDecoration(
-              //   border: Border.all(width: 2, color: Colors.grey),
-              //   borderRadius: BorderRadius.circular(10),
-              // ),
               child: TextField(
                 // onChanged: (val) {},
                 cursorColor: Colors.white,
@@ -101,7 +98,9 @@ class _SearchModalState extends State<SearchModal> {
                           subtitle: Text(
                             'Location ${i + 1}',
                           ),
-                          // onTap: () {print('query is: ' + widget.query);},
+                          onTap: () {
+                            Navigator.of(context).pushNamed(CampDetail.routeName);
+                          },
                         ),
                       ),
                     ),
