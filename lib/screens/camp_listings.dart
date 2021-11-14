@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import './camp_detail_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import './camp_detail_screen.dart';
+import './search_modal.dart';
 
 class CampListings extends StatefulWidget {
   @override
@@ -10,18 +9,30 @@ class CampListings extends StatefulWidget {
 }
 
 class _CampListingsState extends State<CampListings> {
+  void _search(BuildContext cotext) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      isDismissible: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(10),
+        ),
+      ),
+      context: context,
+      builder: (bCtx) {
+        return SearchModal();
+      },
+    );
+  }
 
   Future<void> _refreshCamps(BuildContext context) async {
     setState(() {});
   }
-  
+
   @override
   Widget build(BuildContext context) {
-
-    CollectionReference camps = FirebaseFirestore.instance.collection('camp-details');
-    print("db data: ");
-    inspect(camps.get());
-    
+    CollectionReference camps =
+        FirebaseFirestore.instance.collection('camp-details');
     return GestureDetector(
       onDoubleTap: () {
         final FocusScopeNode currentScope = FocusScope.of(context);
@@ -33,6 +44,29 @@ class _CampListingsState extends State<CampListings> {
         padding: const EdgeInsets.only(left: 5, right: 5, top: 10),
         child: Column(
           children: [
+            GestureDetector(
+              onTap: () {
+                _search(context);
+              },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 2, color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  'Search 🔍',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 25,
+                  ),
+                ),
+              ),
+            ),
             SizedBox(
               height: 5,
             ),
@@ -58,6 +92,7 @@ class _CampListingsState extends State<CampListings> {
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (context, i) {
                             final campDoc = snapshot.data!.docs[i];
+                            final campId = snapshot.data!.docs[i].id;
                             final address1 = campDoc['address'].split(',');
                             return Card(
                               shape: RoundedRectangleBorder(
@@ -89,8 +124,21 @@ class _CampListingsState extends State<CampListings> {
                                     softWrap: false,
                                   ),
                                   onTap: () {
-                                    Navigator.of(context)
-                                        .pushNamed(CampDetail.routeName);
+                                    Navigator.of(context).pushNamed(
+                                      CampDetail.routeName,
+                                      arguments: {
+                                        'id': campId,
+                                        'title': campDoc['title'],
+                                        'price': campDoc['price'],
+                                        'description': campDoc['description'],
+                                        'address': campDoc['address'],
+                                        'latitude': campDoc['loc_lat'],
+                                        'longitude': campDoc['loc_lng'],
+                                        'imgUrl': campDoc['image_url'],
+                                        'post_date': campDoc['cid'],
+                                        'post_by': campDoc['uid']
+                                      },
+                                    );
                                   },
                                 ),
                               ),

@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import './location_screen.dart';
+import '../models/place.dart';
+import '../helpers/location_helper.dart';
 
 class CampDetail extends StatefulWidget {
   static const routeName = '/campDetail';
@@ -8,10 +12,27 @@ class CampDetail extends StatefulWidget {
 
 class _CampDetailState extends State<CampDetail> {
 
-  String content = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).";
-
   @override
   Widget build(BuildContext context) {
+    final routeArgs =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final _campDetails = {
+      'id': routeArgs['id'],
+      'title': routeArgs['title'],
+      'price': routeArgs['price'],
+      'description': routeArgs['description'],
+      'address': routeArgs['address'],
+      'latitude': routeArgs['latitude'],
+      'longitude': routeArgs['longitude'],
+      'imgUrl': routeArgs['imgUrl'],
+      'post_date': routeArgs['post_date'],
+      'post_by': routeArgs['post_by']
+    };
+    final _imagePreviewUrl = LocationHelper.generateLocationPreviewImage(
+        latitude: _campDetails['latitude'],
+        longitude: _campDetails['longitude']);
+    final userRef = FirebaseFirestore.instance.collection('users');
+
     return Scaffold(
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
@@ -33,11 +54,11 @@ class _CampDetailState extends State<CampDetail> {
               centerTitle: true,
               background: SizedBox(
                 child: Image.network(
-                  'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80',
+                  _campDetails['imgUrl'],
                   fit: BoxFit.cover,
                 ),
               ),
-              title: Text("Campground Name"),
+              title: Text(_campDetails['title']),
             ),
             actions: [
               IconButton(
@@ -50,62 +71,260 @@ class _CampDetailState extends State<CampDetail> {
             ],
           ),
           SliverToBoxAdapter(
-            child: infoContainer("Price", '1000'),
-          ),
-          SliverToBoxAdapter(
-            child: infoContainer("Description", content),
-          ),
-          SliverToBoxAdapter(
-            child: infoContainer("Location", content),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget infoContainer(String heading, String data) {
-    return new 
-    Container(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 20),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Container(
-            // height: 400,
-            color: Colors.grey[600],
-            child: Container(
-              margin: EdgeInsets.only(left:20.0, top:20.0, right:20.0, bottom:20.0),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0.0, 1.0, 0.0, 10.0),
-                    child: Text(
-                      heading,
-                      style: TextStyle(
-                        fontSize: 27,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.amber,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(10, 12, 10, 12),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            _campDetails['title'],
+                            style: TextStyle(
+                              fontSize: 35,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Expanded(child: Text('')),
+                          FutureBuilder(
+                            future: userRef.doc(_campDetails['post_by']).get(),
+                            builder: (BuildContext ctx, snapShot) {
+                              if (snapShot.connectionState == ConnectionState.done){
+                                DocumentSnapshot<Object?> data = snapShot.data! as DocumentSnapshot;
+                                return Chip(
+                                  label: Text(
+                                    '- ${data['username']}',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                );
+                              }
+                              return Text('');
+                            },
+                          ),
+                        ],
                       ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0.0, 1.0, 0.0, 5.0),
-                    child: Text(
-                      data,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.white,
+                      SizedBox(
+                        height: 15,
                       ),
-                      textAlign: TextAlign.left,
-                    ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Price: ',
+                          style: TextStyle(
+                            fontSize: 23,
+                            color: Theme.of(context).accentColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Chip(
+                          labelPadding: const EdgeInsets.symmetric(
+                              vertical: 5, horizontal: 20),
+                          label: Text(
+                            '\$ ${_campDetails['price']} / night',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Description: ',
+                          style: TextStyle(
+                            fontSize: 23,
+                            color: Theme.of(context).accentColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          _campDetails['description'],
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          softWrap: true,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Address: ',
+                          style: TextStyle(
+                            fontSize: 23,
+                            color: Theme.of(context).accentColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          _campDetails['address'],
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            )
+            ),
           ),
-        ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  child: Column(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Location: ',
+                          style: TextStyle(
+                            fontSize: 23,
+                            color: Theme.of(context).accentColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        height: 200,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.white,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            _imagePreviewUrl,
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              fullscreenDialog: true,
+                              builder: (ctx) => LocationScreen(
+                                initialLocation: PlaceLocation(
+                                  latitude: _campDetails['latitude'],
+                                  longitude: _campDetails['longitude'],
+                                ),
+                                isSelecting: false,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Text(
+                            'View on Map 🗺️',
+                            style: TextStyle(
+                              color: Color.fromRGBO(48, 48, 48, 1),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              side: BorderSide(
+                                color: Theme.of(context).accentColor,
+                              ),
+                            ),
+                          ),
+                          backgroundColor: MaterialStateProperty.all(
+                              Theme.of(context).accentColor),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Posted On: ',
+                          style: TextStyle(
+                            fontSize: 23,
+                            color: Theme.of(context).accentColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Chip(
+                        label: Text(
+                          '${_campDetails['post_date'].split(' ')[0]}',
+                          style: TextStyle(
+                            fontSize: 17,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          // SliverToBoxAdapter(
+          //   child: Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          //     child: ClipRRect(
+          //       borderRadius: BorderRadius.circular(10),
+          //       child: Container(
+          //         height: 400,
+          //         color: Colors.grey[600],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+        ],
       ),
     );
   }

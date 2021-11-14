@@ -53,7 +53,7 @@ class _LocationScreenState extends State<LocationScreen> {
             widget.initialLocation.latitude!,
             widget.initialLocation.longitude!,
           ),
-          zoom: 5.0,
+          zoom: widget.isSelecting ? 5.0: 13.0,
           onTap: widget.isSelecting ? _selectLocation : null,
         ),
         layers: [

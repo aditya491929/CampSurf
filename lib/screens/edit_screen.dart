@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import './your_listings.dart';
 
 class EditScreen extends StatefulWidget {
   static const routeName = '/editCamp';
@@ -13,6 +13,8 @@ class _EditScreenState extends State<EditScreen> {
   final _priceController = TextEditingController();
   final _descriptionController = TextEditingController();
 
+  var campId;
+
   void _editCamp() async {
     try {
       if (_titleController.text.isEmpty ||
@@ -21,11 +23,9 @@ class _EditScreenState extends State<EditScreen> {
         return;
       }
 
-      final user = FirebaseAuth.instance.currentUser;
-
       await FirebaseFirestore.instance
           .collection('camp-details')
-          .doc('OnfSC7poD6JaLi8w2oMC')
+          .doc(campId)
           .update({
         'title': _titleController.text,
         'price': _priceController.text,
@@ -44,8 +44,9 @@ class _EditScreenState extends State<EditScreen> {
         ),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      Navigator.of(context).pop();
+      Navigator.of(context).pushReplacementNamed(YourListings.routeName);
     } catch (error) {
+      print(error);
       await showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
@@ -71,6 +72,13 @@ class _EditScreenState extends State<EditScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final routeArgs =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    campId = routeArgs['cid'];
+    final _initialTitle = routeArgs['title'];
+    final _initialPrice = routeArgs['price'];
+    final _initialDescription = routeArgs['description'];
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -130,7 +138,7 @@ class _EditScreenState extends State<EditScreen> {
                           ),
                         ),
                       ),
-                      controller: _titleController,
+                      controller: _titleController..text = _initialTitle!,
                       textInputAction: TextInputAction.next,
                       cursorHeight: 29,
                       cursorColor: Theme.of(context).accentColor,
@@ -163,7 +171,7 @@ class _EditScreenState extends State<EditScreen> {
                           ),
                         ),
                       ),
-                      controller: _priceController,
+                      controller: _priceController..text = _initialPrice!,
                       textInputAction: TextInputAction.next,
                       cursorHeight: 29,
                       cursorColor: Theme.of(context).accentColor,
@@ -198,8 +206,9 @@ class _EditScreenState extends State<EditScreen> {
                           ),
                         ),
                       ),
-                      controller: _descriptionController,
-                      textInputAction: TextInputAction.next,
+                      controller: _descriptionController
+                        ..text = _initialDescription!,
+                      textInputAction: TextInputAction.done,
                       cursorHeight: 29,
                       cursorColor: Theme.of(context).accentColor,
                       style: TextStyle(

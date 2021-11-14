@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,16 +18,19 @@ class _YourListingsState extends State<YourListings> {
 
   @override
   Widget build(BuildContext context) {
-
     final user = FirebaseAuth.instance.currentUser;
-    // print(user?.uid);
 
-    var myCamps = FirebaseFirestore.instance.collection('camp-details')
-      .where('uid', isEqualTo: 
-      user?.uid)
-      // 'HS4K4j1k4SO50QruezngGCCsT3k1')
-      ;
-    inspect(myCamps.get());
+    var myCamps = FirebaseFirestore.instance
+        .collection('camp-details')
+        .where('uid', isEqualTo: user?.uid);
+
+    void _deleteCamp(String id) async {
+      await FirebaseFirestore.instance
+          .collection('camp-details')
+          .doc(id)
+          .delete();
+      setState(() {});
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -98,9 +99,10 @@ class _YourListingsState extends State<YourListings> {
                 onRefresh: () => _refreshCamps(context),
                 color: Theme.of(context).accentColor,
                 child: FutureBuilder(
-                  future: myCamps.get(),//.orderBy('cid', descending: true).get(),
+                  future:
+                      myCamps.get(), //.orderBy('cid', descending: true).get(),
                   builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(
                         child: CircularProgressIndicator(
@@ -110,80 +112,158 @@ class _YourListingsState extends State<YourListings> {
                     }
                     if (snapshot.connectionState == ConnectionState.done) {
                       if (snapshot.data!.docs.length != 0) {
-
                         return Scrollbar(
                           child: ListView.builder(
                             physics: BouncingScrollPhysics(),
                             itemCount: snapshot.data!.docs.length,
                             itemBuilder: (context, i) {
                               final campDoc = snapshot.data!.docs[i];
+                              final campId = snapshot.data!.docs[i].id;
                               final address1 = campDoc['address'].split(',');
-                              return Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                              return Dismissible(
+                                key: ValueKey(campId),
+                                background: Container(
+                                  color: Theme.of(context).errorColor,
+                                  margin: EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                    vertical: 4,
+                                  ),
+                                  child: Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                    size: 40,
+                                  ),
+                                  alignment: Alignment.centerRight,
+                                  padding: EdgeInsets.only(right: 20),
                                 ),
-                                elevation: 8,
-                                margin: const EdgeInsets.symmetric(
-                                    horizontal: 5, vertical: 6),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8),
-                                  child: ListTile(
-                                    leading: CircleAvatar(
-                                      radius: 30,
-                                      backgroundImage: NetworkImage(
-                                        campDoc['image_url'],
+                                direction: DismissDirection.endToStart,
+                                confirmDismiss: (direction) {
+                                  return showDialog(
+                                    context: context,
+                                    builder: (ctx) => AlertDialog(
+                                      title: Text('Are you sure?'),
+                                      content: Text(
+                                          'Do you want to remove the item from the cart?'),
+                                      actions: [
+                                        TextButton(
+                                          child: Text(
+                                            'Cancel',
+                                            style: TextStyle(
+                                              color:
+                                                  Theme.of(context).accentColor,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(ctx).pop(false);
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text(
+                                            'Remove',
+                                            style: TextStyle(
+                                              color:
+                                                  Theme.of(context).accentColor,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(ctx).pop(true);
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                onDismissed: (direction) {
+                                  _deleteCamp(campId);
+                                },
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  elevation: 8,
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 5, vertical: 6),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: ListTile(
+                                      leading: CircleAvatar(
+                                        radius: 30,
+                                        backgroundImage: NetworkImage(
+                                          campDoc['image_url'],
+                                        ),
                                       ),
-                                    ),
-                                    title: Text(
-                                      campDoc['title'],
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
+                                      title: Text(
+                                        campDoc['title'],
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
-                                    subtitle: Text(
-                                      '${address1[3]}, ${address1[4]}',
-                                      overflow: TextOverflow.fade,
-                                      maxLines: 1,
-                                      softWrap: false,
-                                    ),
-                                    trailing: IconButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pushNamed(EditScreen.routeName);
+                                      subtitle: Text(
+                                        '${address1[3]}, ${address1[4]}',
+                                        overflow: TextOverflow.fade,
+                                        maxLines: 1,
+                                        softWrap: false,
+                                      ),
+                                      trailing: IconButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pushNamed(
+                                              EditScreen.routeName,
+                                              arguments: {
+                                                'cid': campId,
+                                                'title': campDoc['title'],
+                                                'price': campDoc['price'],
+                                                'description':
+                                                    campDoc['description'],
+                                              });
+                                        },
+                                        icon: Icon(
+                                          Icons.edit_outlined,
+                                          color: Theme.of(context).accentColor,
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        Navigator.of(context).pushNamed(
+                                          CampDetail.routeName,
+                                          arguments: {
+                                            'id': campId,
+                                            'title': campDoc['title'],
+                                            'price': campDoc['price'],
+                                            'description': campDoc['description'],
+                                            'address': campDoc['address'],
+                                            'latitude': campDoc['loc_lat'],
+                                            'longitude': campDoc['loc_lng'],
+                                            'imgUrl': campDoc['image_url'],
+                                            'post_date': campDoc['cid'],
+                                            'post_by': campDoc['uid']
+                                          },
+                                        );
                                       },
-                                      icon: Icon(
-                                        Icons.edit_outlined,
-                                        color: Theme.of(context).accentColor,
-                                      ),
                                     ),
-                                    onTap: () {
-                                      Navigator.of(context)
-                                          .pushNamed(CampDetail.routeName);
-                                    },
                                   ),
                                 ),
                               );
                             },
                           ),
                         );
-                      }
-                      else {
+                      } else {
                         return Center(
-                          child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '🙁',
-                                  style: TextStyle(
-                                    fontSize: 40,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                Text(''),
-                                Text('You have not listed any Camps!'),
-                              ],
-                          ) 
-                        );
+                            child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '🙁',
+                              style: TextStyle(
+                                fontSize: 40,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(''),
+                            Text('You have not listed any Camps!'),
+                          ],
+                        ));
                       }
                     }
                     return Text('');

@@ -5,8 +5,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import '../widgets/drawer/main_drawer.dart';
 import './camp_listings.dart';
 import './map_screen.dart';
-import './search_modal.dart';
-
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -17,41 +15,6 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
     double? topPadding;
-
-  _renderShowModal(){
-    return showModalBottomSheet<void>(
-      isScrollControlled: true,
-      isDismissible: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(10),),
-      ),
-      context: context,
-      builder: (BuildContext context) {
-
-        return Container(
-          height: MediaQuery.of(context).size.height - topPadding!,
-          child: Column(
-            children: <Widget>[
-              // Container(
-              //   height: 5,
-              //   width: 55,
-              //   margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-              //   decoration: BoxDecoration(
-              //     color: Theme.of(context).accentColor,
-              //     borderRadius: BorderRadius.circular(10)
-              //   ),
-              // ),
-              Expanded(
-                child: SizedBox(
-                  child: SearchModal(),
-                ),
-              ),
-            ],
-          )
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,12 +80,11 @@ class _TabsScreenState extends State<TabsScreen> {
           actions: [
             IconButton(
               icon: Icon(
-                Icons.search_rounded,
+                Icons.add,
                 size: 30,
               ),
               onPressed: () {
-                // Navigator.of(context).pushNamed(AddCampScreen.routeName);
-                _renderShowModal();
+                Navigator.of(context).pushNamed(AddCampScreen.routeName);
               },
             ),
           ],
