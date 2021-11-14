@@ -6,9 +6,9 @@ import 'package:latlong2/latlong.dart' as latLng;
 import '../../helpers/location_helper.dart';
 
 class LocationInput extends StatefulWidget {
-  final Function onSelectPlace = () {};
+  final Function(double lat, double lon) onSelectPlace;
 
-  // LocationInput(this.onSelectPlace);
+  LocationInput(this.onSelectPlace);
   @override
   _LocationInputState createState() => _LocationInputState();
 }
@@ -32,8 +32,8 @@ class _LocationInputState extends State<LocationInput> {
       print(locData.latitude.toString() + ' ' + locData.longitude.toString());
       _showPreview(locData.latitude, locData.longitude);
       widget.onSelectPlace(
-        locData.latitude,
-        locData.longitude,
+        locData.latitude!,
+        locData.longitude!,
       );
     } catch (err) {
       return;

@@ -11,4 +11,13 @@ class LocationHelper {
       {double? latitude, double? longitude}) {
     return 'https://api.mapbox.com/styles/v1/mapbox/outdoors-v11/static/pin-s+ee2f2f($longitude,$latitude)/$longitude,$latitude,13,0,60/400x400?access_token=$accessToken';
   }
+
+  static Future<String> getCampAddress(double? lat, double? lng) async {
+    final url = Uri.parse(
+        'https://api.mapbox.com/geocoding/v5/mapbox.places/$lng,$lat.json?access_token=$accessToken');
+
+    final response = await http.get(url);
+    print(json.decode(response.body));
+    return json.decode(response.body)['features'][0]['place_name'];
+  }
 }

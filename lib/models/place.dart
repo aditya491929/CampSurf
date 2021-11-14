@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 
 class PlaceLocation {
@@ -20,7 +18,7 @@ class Place {
   final String? price;
   final String? description;
   final PlaceLocation? location;
-  final File? image;
+  final String? image;
 
   const Place({
     @required this.id,

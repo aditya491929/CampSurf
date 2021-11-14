@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageInput extends StatefulWidget {
-  final Function onSelectImage = () => {};
-  // ImageInput(this.onSelectImage);
+  final Function(File pickedImage) onSelectImage;
+  ImageInput(this.onSelectImage);
 
   @override
   _ImageInputState createState() => _ImageInputState();
@@ -13,7 +13,7 @@ class ImageInput extends StatefulWidget {
 class _ImageInputState extends State<ImageInput> {
   File _pickedImage = File('');
 
-  Future<void> _chooseProfilePhoto() async {
+  Future<void> _chooseCampPhoto() async {
     final picker = ImagePicker();
     var pickedImageFile;
     showDialog(
@@ -123,7 +123,7 @@ class _ImageInputState extends State<ImageInput> {
         ),
         Expanded(
           child: TextButton.icon(
-            onPressed: _chooseProfilePhoto,
+            onPressed: _chooseCampPhoto,
             icon: Icon(
               Icons.camera_alt_outlined,
               color: Colors.amber,
