@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import './camp_detail_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,6 +19,8 @@ class _CampListingsState extends State<CampListings> {
   Widget build(BuildContext context) {
 
     CollectionReference camps = FirebaseFirestore.instance.collection('camp-details');
+    print("db data: ");
+    inspect(camps.get());
     
     return GestureDetector(
       onDoubleTap: () {
