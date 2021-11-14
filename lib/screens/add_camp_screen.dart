@@ -317,25 +317,28 @@ class _AddCampScreenState extends State<AddCampScreen> {
                 ),
               ],
             ),
-            if(_isLoading)
+            if (_isLoading)
               BackdropFilter(
                 filter: ImageFilter.blur(
                   sigmaX: 5,
                   sigmaY: 5,
                 ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(
-                      color: Theme.of(context).accentColor,
-                    ),
-                    Text(
-                      'Adding Campsite 🏕',
-                      style: TextStyle(
-                        fontSize: 17,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(
+                        color: Theme.of(context).accentColor,
                       ),
-                    ),
-                  ],
+                      Text(
+                        'Adding Campsite 🏕',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
           ],

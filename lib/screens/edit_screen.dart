@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class EditScreen extends StatefulWidget {
   static const routeName = '/editCamp';
@@ -8,6 +9,66 @@ class EditScreen extends StatefulWidget {
 }
 
 class _EditScreenState extends State<EditScreen> {
+  final _titleController = TextEditingController();
+  final _priceController = TextEditingController();
+  final _descriptionController = TextEditingController();
+
+  void _editCamp() async {
+    try {
+      if (_titleController.text.isEmpty ||
+          _priceController.text.isEmpty ||
+          _descriptionController.text.isEmpty) {
+        return;
+      }
+
+      final user = FirebaseAuth.instance.currentUser;
+
+      await FirebaseFirestore.instance
+          .collection('camp-details')
+          .doc('OnfSC7poD6JaLi8w2oMC')
+          .update({
+        'title': _titleController.text,
+        'price': _priceController.text,
+        'description': _descriptionController.text,
+      });
+      print('Done');
+      final snackBar = SnackBar(
+        backgroundColor: Colors.black,
+        content: Text(
+          'Camp Edited Successfully! 🎉',
+          style: TextStyle(
+            color: Theme.of(context).accentColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      Navigator.of(context).pop();
+    } catch (error) {
+      await showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text('An error occurred!'),
+          content: Text('Something went wrong!'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+              child: Text(
+                'Okay',
+                style: TextStyle(
+                  color: Theme.of(context).accentColor,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,9 +86,7 @@ class _EditScreenState extends State<EditScreen> {
         title: Text('Edit Campground'),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+            onPressed: _editCamp,
             icon: Icon(
               Icons.save_outlined,
               size: 30,
@@ -71,7 +130,7 @@ class _EditScreenState extends State<EditScreen> {
                           ),
                         ),
                       ),
-                      // controller: _titleController,
+                      controller: _titleController,
                       textInputAction: TextInputAction.next,
                       cursorHeight: 29,
                       cursorColor: Theme.of(context).accentColor,
@@ -104,7 +163,7 @@ class _EditScreenState extends State<EditScreen> {
                           ),
                         ),
                       ),
-                      // controller: _titleController,
+                      controller: _priceController,
                       textInputAction: TextInputAction.next,
                       cursorHeight: 29,
                       cursorColor: Theme.of(context).accentColor,
@@ -139,7 +198,7 @@ class _EditScreenState extends State<EditScreen> {
                           ),
                         ),
                       ),
-                      // controller: _titleController,
+                      controller: _descriptionController,
                       textInputAction: TextInputAction.next,
                       cursorHeight: 29,
                       cursorColor: Theme.of(context).accentColor,
