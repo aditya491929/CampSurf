@@ -178,69 +178,72 @@ class _YourListingsState extends State<YourListings> {
                                 onDismissed: (direction) {
                                   _deleteCamp(campId);
                                 },
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  elevation: 8,
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 6),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8),
-                                    child: ListTile(
-                                      leading: CircleAvatar(
-                                        radius: 30,
-                                        backgroundImage: NetworkImage(
-                                          campDoc['image_url'],
+                                child: Hero(
+                                  tag: campId,
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    elevation: 8,
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 6),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8),
+                                      child: ListTile(
+                                        leading: CircleAvatar(
+                                          radius: 30,
+                                          backgroundImage: NetworkImage(
+                                            campDoc['image_url'],
+                                          ),
                                         ),
-                                      ),
-                                      title: Text(
-                                        campDoc['title'],
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
+                                        title: Text(
+                                          campDoc['title'],
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                      subtitle: Text(
-                                        '${address1[3]}, ${address1[4]}',
-                                        overflow: TextOverflow.fade,
-                                        maxLines: 1,
-                                        softWrap: false,
-                                      ),
-                                      trailing: IconButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pushNamed(
-                                              EditScreen.routeName,
-                                              arguments: {
-                                                'cid': campId,
-                                                'title': campDoc['title'],
-                                                'price': campDoc['price'],
-                                                'description':
-                                                    campDoc['description'],
-                                              });
-                                        },
-                                        icon: Icon(
-                                          Icons.edit_outlined,
-                                          color: Theme.of(context).accentColor,
+                                        subtitle: Text(
+                                          '${address1[3]}, ${address1[4]}',
+                                          overflow: TextOverflow.fade,
+                                          maxLines: 1,
+                                          softWrap: false,
                                         ),
-                                      ),
-                                      onTap: () {
-                                        Navigator.of(context).pushNamed(
-                                          CampDetail.routeName,
-                                          arguments: {
-                                            'id': campId,
-                                            'title': campDoc['title'],
-                                            'price': campDoc['price'],
-                                            'description': campDoc['description'],
-                                            'address': campDoc['address'],
-                                            'latitude': campDoc['loc_lat'],
-                                            'longitude': campDoc['loc_lng'],
-                                            'imgUrl': campDoc['image_url'],
-                                            'post_date': campDoc['cid'],
-                                            'post_by': campDoc['uid']
+                                        trailing: IconButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pushNamed(
+                                                EditScreen.routeName,
+                                                arguments: {
+                                                  'cid': campId,
+                                                  'title': campDoc['title'],
+                                                  'price': campDoc['price'],
+                                                  'description':
+                                                      campDoc['description'],
+                                                });
                                           },
-                                        );
-                                      },
+                                          icon: Icon(
+                                            Icons.edit_outlined,
+                                            color: Theme.of(context).accentColor,
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          Navigator.of(context).pushNamed(
+                                            CampDetail.routeName,
+                                            arguments: {
+                                              'id': campId,
+                                              'title': campDoc['title'],
+                                              'price': campDoc['price'],
+                                              'description': campDoc['description'],
+                                              'address': campDoc['address'],
+                                              'latitude': campDoc['loc_lat'],
+                                              'longitude': campDoc['loc_lng'],
+                                              'imgUrl': campDoc['image_url'],
+                                              'post_date': campDoc['cid'],
+                                              'post_by': campDoc['uid']
+                                            },
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ),

@@ -52,10 +52,13 @@ class _CampDetailState extends State<CampDetail> {
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
-              background: SizedBox(
-                child: Image.network(
-                  _campDetails['imgUrl'],
-                  fit: BoxFit.cover,
+              background: Hero(
+                tag: _campDetails['id'],
+                child: SizedBox(
+                  child: Image.network(
+                    _campDetails['imgUrl'],
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               title: Text(_campDetails['title']),
