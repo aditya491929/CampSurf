@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import './tabs_screen.dart';
 import './edit_screen.dart';
@@ -24,7 +25,9 @@ class _YourListingsState extends State<YourListings> {
         .collection('camp-details')
         .where('uid', isEqualTo: user?.uid);
 
-    void _deleteCamp(String id) async {
+    void _deleteCamp(String id, String url) async {
+      await FirebaseStorage.instance.refFromURL(url).delete();
+
       await FirebaseFirestore.instance
           .collection('camp-details')
           .doc(id)
@@ -176,7 +179,7 @@ class _YourListingsState extends State<YourListings> {
                                   );
                                 },
                                 onDismissed: (direction) {
-                                  _deleteCamp(campId);
+                                  _deleteCamp(campId, campDoc['image_url']);
                                 },
                                 child: Hero(
                                   tag: campId,
