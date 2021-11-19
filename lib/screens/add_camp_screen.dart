@@ -76,6 +76,15 @@ class _AddCampScreenState extends State<AddCampScreen> {
 
       final user = FirebaseAuth.instance.currentUser;
 
+      List<String> splitList = newCamp.title!.split(' ');
+      List<String> indexList = [];
+
+      for (int i = 0; i < splitList.length; i++) {
+        for (int j = 0; j < splitList[i].length + i; j++) {
+          indexList.add(splitList[i].substring(0, j).toLowerCase());
+        }
+      }
+
       await FirebaseFirestore.instance.collection('camp-details').doc().set({
         'uid': user!.uid,
         'cid': newCamp.id,
@@ -86,6 +95,7 @@ class _AddCampScreenState extends State<AddCampScreen> {
         'loc_lat': newCamp.location!.latitude,
         'loc_lng': newCamp.location!.longitude,
         'address': newCamp.location!.address,
+        'searchIndex': indexList,
       });
       print('Done');
       final snackBar = SnackBar(

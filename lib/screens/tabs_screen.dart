@@ -8,19 +8,19 @@ import './map_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/home';
-  
+
   @override
   _TabsScreenState createState() => _TabsScreenState();
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-    double? topPadding;
+  double? topPadding;
 
   @override
   Widget build(BuildContext context) {
     topPadding = MediaQuery.of(context).padding.top;
 
-    final bool showFab = MediaQuery.of(context).viewInsets.bottom == 0.0;
+    bool showFab = MediaQuery.of(context).viewInsets.bottom == 0.0;
 
     return DefaultTabController(
       length: 2,
@@ -65,6 +65,22 @@ class _TabsScreenState extends State<TabsScreen> {
           centerTitle: true,
           elevation: 4,
           bottom: TabBar(
+            onTap: (index) {
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              if (index == 1) {
+                print('$index $showFab');
+                setState(() {
+                  showFab = false;
+                });
+                print(showFab);
+              }else{
+                print('$index $showFab');
+                setState(() {
+                  showFab = true;
+                });
+                print(showFab);
+              }
+            },
             indicatorColor: Theme.of(context).accentColor,
             tabs: [
               Tab(

@@ -69,8 +69,9 @@ class _LocationScreenState extends State<LocationScreen> {
                 ? []
                 : [
                     Marker(
-                      width: 45.0,
-                      height: 45.0,
+                      anchorPos: AnchorPos.exactly(Anchor(0.5, 1)),
+                      width: 40.0,
+                      height: 40.0,
                       point: _pickedLocation ??
                           latLng.LatLng(widget.initialLocation.latitude!,
                               widget.initialLocation.longitude!),
@@ -81,7 +82,7 @@ class _LocationScreenState extends State<LocationScreen> {
                           },
                           icon: Icon(Icons.location_on),
                           color: Colors.red,
-                          iconSize: 45.0,
+                          iconSize: 40.0,
                         ),
                       ),
                     ),
