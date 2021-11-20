@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart' as latLng;
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 
@@ -39,7 +40,7 @@ class _MapScreenState extends State<MapScreen> {
                 width: 200,
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: Colors.grey,
+                    color: Color.fromRGBO(48, 48, 48, 1),
                     width: 1,
                   ),
                   borderRadius: BorderRadius.circular(10),
@@ -62,10 +63,12 @@ class _MapScreenState extends State<MapScreen> {
                   children: [
                     Text(
                       camp['title'],
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                      style: GoogleFonts.lato( 
+                          textStyle: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -73,10 +76,12 @@ class _MapScreenState extends State<MapScreen> {
                     ),
                     Text(
                       'Price: ',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Theme.of(context).accentColor,
-                        fontWeight: FontWeight.bold,
+                      style: GoogleFonts.karla(
+                          textStyle: TextStyle(
+                          fontSize: 20,
+                          color: Theme.of(context).accentColor,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     Chip(
@@ -84,9 +89,11 @@ class _MapScreenState extends State<MapScreen> {
                           vertical: 3, horizontal: 7),
                       label: Text(
                         '\$ ${camp['price']} / night',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
+                        style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -112,9 +119,11 @@ class _MapScreenState extends State<MapScreen> {
                       }, 
                       child: Text(
                         'More Info', 
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold,
+                        style: GoogleFonts.karla(
+                            textStyle: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       style: ButtonStyle(

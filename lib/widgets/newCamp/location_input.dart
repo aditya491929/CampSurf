@@ -1,5 +1,6 @@
 import 'package:campsurf/screens/location_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:location/location.dart';
 import 'package:latlong2/latlong.dart' as latLng;
 
@@ -79,9 +80,11 @@ class _LocationInputState extends State<LocationInput> {
               ? Text(
                   'No Location Chosen',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
+                  style: GoogleFonts.lato(
+                      textStyle: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
                   ),
                 )
               : ClipRRect(
@@ -104,10 +107,12 @@ class _LocationInputState extends State<LocationInput> {
               ),
               label: Text(
                 'Current Location',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -119,10 +124,12 @@ class _LocationInputState extends State<LocationInput> {
               ),
               label: Text(
                 'Select Location',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

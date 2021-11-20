@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 import './camp_detail_screen.dart';
 import './search_modal.dart';
 
@@ -60,9 +61,11 @@ class _CampListingsState extends State<CampListings> {
                 ),
                 child: Text(
                   'Search 🔍',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 25,
+                  style: GoogleFonts.inter(
+                    textStyle: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 25,
+                    ),
                   ),
                 ),
               ),
@@ -114,13 +117,16 @@ class _CampListingsState extends State<CampListings> {
                                     ),
                                     title: Text(
                                       campDoc['title'],
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
+                                      style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                     subtitle: Text(
                                       '${address1[3]}, ${address1[4]}',
+                                      style: GoogleFonts.karla(),
                                       overflow: TextOverflow.fade,
                                       maxLines: 1,
                                       softWrap: false,

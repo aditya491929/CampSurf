@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 import './location_screen.dart';
 import '../models/place.dart';
 import '../helpers/location_helper.dart';
@@ -61,7 +62,10 @@ class _CampDetailState extends State<CampDetail> {
                   ),
                 ),
               ),
-              title: Text(_campDetails['title']),
+              title: Text(
+                _campDetails['title'],
+                style: GoogleFonts.lato(),
+              ),
             ),
             actions: [
               IconButton(
@@ -86,9 +90,11 @@ class _CampDetailState extends State<CampDetail> {
                         children: [
                           Text(
                             _campDetails['title'],
-                            style: TextStyle(
-                              fontSize: 35,
-                              fontWeight: FontWeight.bold,
+                            style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                fontSize: 33,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                           Expanded(child: Text('')),
@@ -100,9 +106,11 @@ class _CampDetailState extends State<CampDetail> {
                                 return Chip(
                                   label: Text(
                                     '- ${data['username']}',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w300,
+                                    style: GoogleFonts.karla(
+                                        textStyle: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w300,
+                                      ),
                                     ),
                                   ),
                                 );
@@ -119,10 +127,12 @@ class _CampDetailState extends State<CampDetail> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Price: ',
-                          style: TextStyle(
-                            fontSize: 23,
-                            color: Theme.of(context).accentColor,
-                            fontWeight: FontWeight.bold,
+                          style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                              fontSize: 23,
+                              color: Theme.of(context).accentColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -136,9 +146,11 @@ class _CampDetailState extends State<CampDetail> {
                               vertical: 5, horizontal: 20),
                           label: Text(
                             '\$ ${_campDetails['price']} / night',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                            style: GoogleFonts.karla(
+                                textStyle: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
@@ -150,10 +162,12 @@ class _CampDetailState extends State<CampDetail> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Description: ',
-                          style: TextStyle(
-                            fontSize: 23,
-                            color: Theme.of(context).accentColor,
-                            fontWeight: FontWeight.bold,
+                          style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                              fontSize: 23,
+                              color: Theme.of(context).accentColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -164,9 +178,11 @@ class _CampDetailState extends State<CampDetail> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           _campDetails['description'],
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
+                          style: GoogleFonts.karla(
+                              textStyle: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                           softWrap: true,
                         ),
@@ -178,10 +194,12 @@ class _CampDetailState extends State<CampDetail> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Address: ',
-                          style: TextStyle(
-                            fontSize: 23,
-                            color: Theme.of(context).accentColor,
-                            fontWeight: FontWeight.bold,
+                          style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                              fontSize: 23,
+                              color: Theme.of(context).accentColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -192,9 +210,11 @@ class _CampDetailState extends State<CampDetail> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           _campDetails['address'],
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
+                          style: GoogleFonts.karla(
+                              textStyle: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                         ),
                       ),
@@ -216,10 +236,12 @@ class _CampDetailState extends State<CampDetail> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Location: ',
-                          style: TextStyle(
-                            fontSize: 23,
-                            color: Theme.of(context).accentColor,
-                            fontWeight: FontWeight.bold,
+                          style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                              fontSize: 23,
+                              color: Theme.of(context).accentColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -267,10 +289,12 @@ class _CampDetailState extends State<CampDetail> {
                           padding: const EdgeInsets.all(10),
                           child: Text(
                             'View on Map 🗺️',
-                            style: TextStyle(
-                              color: Color.fromRGBO(48, 48, 48, 1),
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
+                            style: GoogleFonts.karla(
+                                textStyle: TextStyle(
+                                color: Color.fromRGBO(48, 48, 48, 1),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
@@ -294,18 +318,23 @@ class _CampDetailState extends State<CampDetail> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Posted On: ',
-                          style: TextStyle(
-                            fontSize: 23,
-                            color: Theme.of(context).accentColor,
-                            fontWeight: FontWeight.bold,
+                          style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                              fontSize: 23,
+                              color: Theme.of(context).accentColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
                       Chip(
                         label: Text(
                           '${_campDetails['post_date'].split(' ')[0]}',
-                          style: TextStyle(
-                            fontSize: 17,
+                          style: GoogleFonts.karla(
+                              textStyle: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),

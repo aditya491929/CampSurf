@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/newCamp/image_input.dart';
 import '../widgets/newCamp/location_input.dart';
@@ -202,10 +203,12 @@ class _AddCampScreenState extends State<AddCampScreen> {
                       child: Column(
                         children: [
                           Text(
-                            'Add New CampGround 🏕️',
-                            style: TextStyle(
-                              fontSize: 27,
-                              fontWeight: FontWeight.w600,
+                            '🏕️ Add New CampGround',
+                            style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                fontSize: 27,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -214,9 +217,11 @@ class _AddCampScreenState extends State<AddCampScreen> {
                           TextField(
                             decoration: InputDecoration(
                               labelText: 'Title',
-                              labelStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
+                              labelStyle: GoogleFonts.lato(
+                                  textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -251,9 +256,11 @@ class _AddCampScreenState extends State<AddCampScreen> {
                           TextField(
                             decoration: InputDecoration(
                               labelText: 'Price',
-                              labelStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
+                              labelStyle: GoogleFonts.lato(
+                                  textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -286,9 +293,11 @@ class _AddCampScreenState extends State<AddCampScreen> {
                             maxLines: 5,
                             decoration: InputDecoration(
                               labelText: 'Description',
-                              labelStyle: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
+                              labelStyle: GoogleFonts.lato(
+                                  textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                ),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -362,9 +371,11 @@ class _AddCampScreenState extends State<AddCampScreen> {
           icon: Icon(Icons.add),
           label: Text(
             "Add CampGround",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+            style: GoogleFonts.inter(
+                textStyle: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           backgroundColor: Theme.of(context).accentColor,

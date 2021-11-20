@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageInput extends StatefulWidget {
@@ -103,9 +104,11 @@ class _ImageInputState extends State<ImageInput> {
           child: _pickedImage.path.isEmpty
               ? Text(
                   'Add an image',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
+                  style: GoogleFonts.lato(
+                      textStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
                   ),
                 )
               : ClipRRect(
@@ -130,10 +133,12 @@ class _ImageInputState extends State<ImageInput> {
             ),
             label: Text(
               'Add Photo',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
+              style: GoogleFonts.lato(
+                textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 17,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

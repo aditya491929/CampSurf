@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -44,11 +45,13 @@ class MainDrawer extends StatelessWidget {
                   alignment: Alignment.bottomLeft,
                   child: Text(
                     'Hello, ${data["username"]}!',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 23,
-                      fontWeight: FontWeight.normal,
-                      fontStyle: FontStyle.italic,
+                    style: GoogleFonts.lato(
+                        textStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 23,
+                        fontWeight: FontWeight.normal,
+                        fontStyle: FontStyle.italic,
+                      ),
                     ),
                   ),
                 );

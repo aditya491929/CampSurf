@@ -101,10 +101,6 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                       subtitle: Text(
                         'Location ${i + 1}',
                       ),
-                      trailing: Icon(
-                        Icons.favorite,
-                        color: Theme.of(context).accentColor,
-                      ),
                       onTap: () {
                         Navigator.of(context).pushNamed(CampDetail.routeName);
                       },

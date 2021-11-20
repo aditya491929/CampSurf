@@ -94,27 +94,68 @@ class _SearchModalState extends State<SearchModal> {
               width: double.infinity,
               child: Scrollbar(
                 radius: Radius.circular(10),
-                child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 7,
-                  itemBuilder: (context, i) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Chip(
-                        avatar: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                              'https://media.istockphoto.com/photos/shot-of-a-cute-vintage-teapot-in-a-campsite-near-to-lake-picture-id1305448692?b=1&k=20&m=1305448692&s=170667a&w=0&h=JIAAnIWgx2dwTi96Zn37rauFCRV11EBIPeTbwAjbpPc='),
+                child: FutureBuilder<QuerySnapshot>(
+                  future: FirebaseFirestore.instance
+                      .collection('camp-details')
+                      .get(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      final campDetails = snapshot.data!.docs;
+                      return Scrollbar(
+                        radius: Radius.circular(10),
+                        child: ListView.builder(
+                          physics: BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          // itemCount: snapshot.data!.docs.length,
+                          itemCount: 4,
+                          itemBuilder: (context, index) {
+                            final camp = campDetails[index];
+                            return Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.of(context).pushNamed(
+                                    CampDetail.routeName,
+                                    arguments: {
+                                      'id': camp.id,
+                                      'title': camp['title'],
+                                      'price': camp['price'],
+                                      'description': camp['description'],
+                                      'address': camp['address'],
+                                      'latitude': camp['loc_lat'],
+                                      'longitude': camp['loc_lng'],
+                                      'imgUrl': camp['image_url'],
+                                      'post_date': camp['cid'],
+                                      'post_by': camp['uid']
+                                    },
+                                  );
+                                },
+                                child: Hero(
+                                  tag: camp.id,
+                                  child: Chip(
+                                    avatar: CircleAvatar(
+                                      backgroundImage:
+                                          NetworkImage(camp['image_url']),
+                                    ),
+                                    label: Text(
+                                      camp['title'],
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    elevation: 6,
+                                    padding: EdgeInsets.all(4),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
                         ),
-                        label: Text(
-                          'Featured ${i + 1}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        elevation: 6,
-                        padding: EdgeInsets.all(4),
-                      ),
+                      );
+                    }
+                    return Center(
+                      child: Text(""),
                     );
                   },
                 ),

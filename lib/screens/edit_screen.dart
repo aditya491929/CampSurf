@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 import './your_listings.dart';
 
 class EditScreen extends StatefulWidget {
@@ -23,6 +24,15 @@ class _EditScreenState extends State<EditScreen> {
         return;
       }
 
+      List<String> splitList = _titleController.text.split(' ');
+      List<String> indexList = [];
+
+      for (int i = 0; i < splitList.length; i++) {
+        for (int j = 0; j < splitList[i].length + i; j++) {
+          indexList.add(splitList[i].substring(0, j).toLowerCase());
+        }
+      }
+
       await FirebaseFirestore.instance
           .collection('camp-details')
           .doc(campId)
@@ -30,6 +40,7 @@ class _EditScreenState extends State<EditScreen> {
         'title': _titleController.text,
         'price': _priceController.text,
         'description': _descriptionController.text,
+        'searchIndex': indexList,
       });
       print('Done');
       final snackBar = SnackBar(
@@ -91,7 +102,10 @@ class _EditScreenState extends State<EditScreen> {
           ),
         ),
         centerTitle: true,
-        title: Text('Edit Campground'),
+        title: Text(
+          'Edit Campground',
+          style: GoogleFonts.inter(),
+        ),
         actions: [
           IconButton(
             onPressed: _editCamp,
@@ -119,9 +133,11 @@ class _EditScreenState extends State<EditScreen> {
                     TextField(
                       decoration: InputDecoration(
                         labelText: 'Title',
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
+                        labelStyle: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -152,9 +168,11 @@ class _EditScreenState extends State<EditScreen> {
                     TextField(
                       decoration: InputDecoration(
                         labelText: 'Price',
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
+                        labelStyle: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -187,9 +205,11 @@ class _EditScreenState extends State<EditScreen> {
                       maxLines: 5,
                       decoration: InputDecoration(
                         labelText: 'Description',
-                        labelStyle: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
+                        labelStyle: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
