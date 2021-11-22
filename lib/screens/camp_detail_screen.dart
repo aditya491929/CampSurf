@@ -88,35 +88,47 @@ class _CampDetailState extends State<CampDetail> {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            _campDetails['title'],
-                            style: GoogleFonts.inter(
-                                textStyle: TextStyle(
-                                fontSize: 33,
-                                fontWeight: FontWeight.bold,
+                          Container(
+                            width: MediaQuery.of(context).size.width*0.5,
+                            child: Text(
+                              _campDetails['title'],
+                              style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                  fontSize: 33,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
+                              overflow: TextOverflow.fade,
+                              maxLines: 1,
+                              softWrap: false,
                             ),
                           ),
                           Expanded(child: Text('')),
-                          FutureBuilder(
-                            future: userRef.doc(_campDetails['post_by']).get(),
-                            builder: (BuildContext ctx, snapShot) {
-                              if (snapShot.connectionState == ConnectionState.done){
-                                DocumentSnapshot<Object?> data = snapShot.data! as DocumentSnapshot;
-                                return Chip(
-                                  label: Text(
-                                    '- ${data['username']}',
-                                    style: GoogleFonts.karla(
-                                        textStyle: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w300,
+                          Container(
+                            width: MediaQuery.of(context).size.width*0.3,
+                            child: FutureBuilder(
+                              future: userRef.doc(_campDetails['post_by']).get(),
+                              builder: (BuildContext ctx, snapShot) {
+                                if (snapShot.connectionState == ConnectionState.done){
+                                  DocumentSnapshot<Object?> data = snapShot.data! as DocumentSnapshot;
+                                  return Chip(
+                                    label: Text(
+                                      '- ${data['username']}',
+                                      style: GoogleFonts.karla(
+                                          textStyle: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w300,
+                                        ),
                                       ),
+                                      overflow: TextOverflow.fade,
+                                      maxLines: 1,
+                                      softWrap: false,
                                     ),
-                                  ),
-                                );
-                              }
-                              return Text('');
-                            },
+                                  );
+                                }
+                                return Text('');
+                              },
+                            ),
                           ),
                         ],
                       ),

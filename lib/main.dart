@@ -13,6 +13,7 @@ import './screens/edit_screen.dart';
 import './screens/camp_detail_screen.dart';
 import './providers/places.dart';
 import './helpers/custom_transition.dart';
+import './screens/splashScreen.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -27,39 +28,40 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (ctx) => Places(),
       child: MaterialApp(
-        title: 'CampSurf',
-        theme: ThemeData.dark().copyWith(
-          accentColor: Colors.amber,
-          primaryColor: Colors.black,
-          textTheme: TextTheme(
-            button: TextStyle(color: Colors.white),
-          ),
-          pageTransitionsTheme: PageTransitionsTheme(
-            builders: {
+          title: 'CampSurf',
+          theme: ThemeData.dark().copyWith(
+            accentColor: Colors.amber,
+            primaryColor: Colors.black,
+            textTheme: TextTheme(
+              button: TextStyle(color: Colors.white),
+            ),
+            pageTransitionsTheme: PageTransitionsTheme(builders: {
               TargetPlatform.android: CustomPageTransitionBuilder(),
-            }
+            }),
           ),
-        ),
-        home: StreamBuilder(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (ctx, userSnapshot) {
-            if (userSnapshot.hasData) {
-              return TabsScreen();
-            }
-            return AuthScreen();
-          },
-        ),
-        debugShowCheckedModeBanner: false,
-        routes: {
-          TabsScreen.routeName : (ctx) => TabsScreen(),
-          AddCampScreen.routeName : (ctx) => AddCampScreen(),
-          FavouritesScreen.routeName : (ctx) => FavouritesScreen(),
-          YourListings.routeName : (ctx) => YourListings(),
-          EditScreen.routeName : (ctx) => EditScreen(),
-          CampDetail.routeName : (ctx) => CampDetail(),
-        }
-      ),
+          home: StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (ctx, userSnapshot) {
+              if (userSnapshot.connectionState == ConnectionState.waiting) {
+                return SplashScreen();
+              }
+              if (userSnapshot.connectionState == ConnectionState.active) {
+                if (userSnapshot.hasData) {
+                  return TabsScreen();
+                }
+              }
+              return AuthScreen();
+            },
+          ),
+          debugShowCheckedModeBanner: false,
+          routes: {
+            TabsScreen.routeName: (ctx) => TabsScreen(),
+            AddCampScreen.routeName: (ctx) => AddCampScreen(),
+            FavouritesScreen.routeName: (ctx) => FavouritesScreen(),
+            YourListings.routeName: (ctx) => YourListings(),
+            EditScreen.routeName: (ctx) => EditScreen(),
+            CampDetail.routeName: (ctx) => CampDetail(),
+          }),
     );
   }
 }
-

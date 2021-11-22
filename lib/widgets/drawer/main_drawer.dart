@@ -97,7 +97,7 @@ class MainDrawer extends StatelessWidget {
           ),
           buildListTile('Logout', Icons.logout_outlined, () {
             FirebaseAuth.instance.signOut();
-            Navigator.of(context).pushReplacementNamed('/');
+            // Navigator.of(context).pushReplacementNamed('/');
           }),
           Divider(
             color: Colors.grey,
