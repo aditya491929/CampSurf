@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import './tabs_screen.dart';
 import './edit_screen.dart';
 import './camp_detail_screen.dart';
@@ -26,9 +24,7 @@ class _YourListingsState extends State<YourListings> {
         .collection('camp-details')
         .where('uid', isEqualTo: user?.uid);
 
-    void _deleteCamp(String id, String url) async {
-      await FirebaseStorage.instance.refFromURL(url).delete();
-
+    void _deleteCamp(String id) async {
       await FirebaseFirestore.instance
           .collection('camp-details')
           .doc(id)
@@ -89,11 +85,9 @@ class _YourListingsState extends State<YourListings> {
           children: [
             Text(
               '📃 Listed Camps',
-              style: GoogleFonts.inter(
-                  textStyle: TextStyle(
-                  fontSize: 27,
-                  fontWeight: FontWeight.w600,
-                ),
+              style: TextStyle(
+                fontSize: 27,
+                fontWeight: FontWeight.w600,
               ),
               textAlign: TextAlign.center,
             ),
@@ -147,24 +141,17 @@ class _YourListingsState extends State<YourListings> {
                                   return showDialog(
                                     context: context,
                                     builder: (ctx) => AlertDialog(
-                                      title: Text(
-                                        'Are you sure?',
-                                        style: GoogleFonts.lato(),
-                                      ),
+                                      title: Text('Are you sure?'),
                                       content: Text(
-                                          'Do you want to remove the item from the cart.',
-                                          style: GoogleFonts.lato(),
-                                        ),
+                                          'Do you want to remove the item from the cart?'),
                                       actions: [
                                         TextButton(
                                           child: Text(
                                             'Cancel',
-                                            style: GoogleFonts.karla(
-                                                textStyle: TextStyle(
-                                                color:
-                                                    Theme.of(context).accentColor,
-                                                fontSize: 18,
-                                              ),
+                                            style: TextStyle(
+                                              color:
+                                                  Theme.of(context).accentColor,
+                                              fontSize: 18,
                                             ),
                                           ),
                                           onPressed: () {
@@ -174,12 +161,10 @@ class _YourListingsState extends State<YourListings> {
                                         TextButton(
                                           child: Text(
                                             'Remove',
-                                            style: GoogleFonts.karla(
-                                                textStyle: TextStyle(
-                                                color:
-                                                    Theme.of(context).accentColor,
-                                                fontSize: 18,
-                                              ),
+                                            style: TextStyle(
+                                              color:
+                                                  Theme.of(context).accentColor,
+                                              fontSize: 18,
                                             ),
                                           ),
                                           onPressed: () {
@@ -191,7 +176,7 @@ class _YourListingsState extends State<YourListings> {
                                   );
                                 },
                                 onDismissed: (direction) {
-                                  _deleteCamp(campId, campDoc['image_url']);
+                                  _deleteCamp(campId);
                                 },
                                 child: Hero(
                                   tag: campId,
@@ -213,16 +198,13 @@ class _YourListingsState extends State<YourListings> {
                                         ),
                                         title: Text(
                                           campDoc['title'],
-                                          style: GoogleFonts.lato(
-                                              textStyle: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                         subtitle: Text(
                                           '${address1[3]}, ${address1[4]}',
-                                          style: GoogleFonts.karla(),
                                           overflow: TextOverflow.fade,
                                           maxLines: 1,
                                           softWrap: false,
@@ -241,7 +223,8 @@ class _YourListingsState extends State<YourListings> {
                                           },
                                           icon: Icon(
                                             Icons.edit_outlined,
-                                            color: Theme.of(context).accentColor,
+                                            color:
+                                                Theme.of(context).accentColor,
                                           ),
                                         ),
                                         onTap: () {
@@ -251,7 +234,8 @@ class _YourListingsState extends State<YourListings> {
                                               'id': campId,
                                               'title': campDoc['title'],
                                               'price': campDoc['price'],
-                                              'description': campDoc['description'],
+                                              'description':
+                                                  campDoc['description'],
                                               'address': campDoc['address'],
                                               'latitude': campDoc['loc_lat'],
                                               'longitude': campDoc['loc_lng'],
