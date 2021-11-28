@@ -12,7 +12,6 @@ class CampDetail extends StatefulWidget {
 }
 
 class _CampDetailState extends State<CampDetail> {
-
   @override
   Widget build(BuildContext context) {
     final routeArgs =
@@ -89,11 +88,11 @@ class _CampDetailState extends State<CampDetail> {
                       Row(
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width*0.5,
+                            width: MediaQuery.of(context).size.width * 0.5,
                             child: Text(
                               _campDetails['title'],
                               style: GoogleFonts.inter(
-                                  textStyle: TextStyle(
+                                textStyle: TextStyle(
                                   fontSize: 33,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -105,17 +104,20 @@ class _CampDetailState extends State<CampDetail> {
                           ),
                           Expanded(child: Text('')),
                           Container(
-                            width: MediaQuery.of(context).size.width*0.3,
+                            width: MediaQuery.of(context).size.width * 0.3,
                             child: FutureBuilder(
-                              future: userRef.doc(_campDetails['post_by']).get(),
+                              future:
+                                  userRef.doc(_campDetails['post_by']).get(),
                               builder: (BuildContext ctx, snapShot) {
-                                if (snapShot.connectionState == ConnectionState.done){
-                                  DocumentSnapshot<Object?> data = snapShot.data! as DocumentSnapshot;
+                                if (snapShot.connectionState ==
+                                    ConnectionState.done) {
+                                  DocumentSnapshot<Object?> data =
+                                      snapShot.data! as DocumentSnapshot;
                                   return Chip(
                                     label: Text(
                                       '- ${data['username']}',
                                       style: GoogleFonts.karla(
-                                          textStyle: TextStyle(
+                                        textStyle: TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w300,
                                         ),
@@ -140,7 +142,7 @@ class _CampDetailState extends State<CampDetail> {
                         child: Text(
                           'Price: ',
                           style: GoogleFonts.lato(
-                              textStyle: TextStyle(
+                            textStyle: TextStyle(
                               fontSize: 23,
                               color: Theme.of(context).accentColor,
                               fontWeight: FontWeight.bold,
@@ -159,7 +161,7 @@ class _CampDetailState extends State<CampDetail> {
                           label: Text(
                             '\$ ${_campDetails['price']} / night',
                             style: GoogleFonts.karla(
-                                textStyle: TextStyle(
+                              textStyle: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -175,7 +177,7 @@ class _CampDetailState extends State<CampDetail> {
                         child: Text(
                           'Description: ',
                           style: GoogleFonts.lato(
-                              textStyle: TextStyle(
+                            textStyle: TextStyle(
                               fontSize: 23,
                               color: Theme.of(context).accentColor,
                               fontWeight: FontWeight.bold,
@@ -191,7 +193,7 @@ class _CampDetailState extends State<CampDetail> {
                         child: Text(
                           _campDetails['description'],
                           style: GoogleFonts.karla(
-                              textStyle: TextStyle(
+                            textStyle: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w400,
                             ),
@@ -207,7 +209,7 @@ class _CampDetailState extends State<CampDetail> {
                         child: Text(
                           'Address: ',
                           style: GoogleFonts.lato(
-                              textStyle: TextStyle(
+                            textStyle: TextStyle(
                               fontSize: 23,
                               color: Theme.of(context).accentColor,
                               fontWeight: FontWeight.bold,
@@ -223,7 +225,7 @@ class _CampDetailState extends State<CampDetail> {
                         child: Text(
                           _campDetails['address'],
                           style: GoogleFonts.karla(
-                              textStyle: TextStyle(
+                            textStyle: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w400,
                             ),
@@ -249,7 +251,7 @@ class _CampDetailState extends State<CampDetail> {
                         child: Text(
                           'Location: ',
                           style: GoogleFonts.lato(
-                              textStyle: TextStyle(
+                            textStyle: TextStyle(
                               fontSize: 23,
                               color: Theme.of(context).accentColor,
                               fontWeight: FontWeight.bold,
@@ -288,12 +290,12 @@ class _CampDetailState extends State<CampDetail> {
                             MaterialPageRoute(
                               fullscreenDialog: true,
                               builder: (ctx) => LocationScreen(
-                                initialLocation: PlaceLocation(
-                                  latitude: _campDetails['latitude'],
-                                  longitude: _campDetails['longitude'],
-                                ),
-                                isSelecting: false,
-                              ),
+                                  initialLocation: PlaceLocation(
+                                    latitude: _campDetails['latitude'],
+                                    longitude: _campDetails['longitude'],
+                                  ),
+                                  isSelecting: false,
+                                  location: _campDetails['address']),
                             ),
                           );
                         },
@@ -302,7 +304,7 @@ class _CampDetailState extends State<CampDetail> {
                           child: Text(
                             'View on Map 🗺️',
                             style: GoogleFonts.karla(
-                                textStyle: TextStyle(
+                              textStyle: TextStyle(
                                 color: Color.fromRGBO(48, 48, 48, 1),
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -331,7 +333,7 @@ class _CampDetailState extends State<CampDetail> {
                         child: Text(
                           'Posted On: ',
                           style: GoogleFonts.lato(
-                              textStyle: TextStyle(
+                            textStyle: TextStyle(
                               fontSize: 23,
                               color: Theme.of(context).accentColor,
                               fontWeight: FontWeight.bold,
@@ -343,7 +345,7 @@ class _CampDetailState extends State<CampDetail> {
                         label: Text(
                           '${_campDetails['post_date'].split(' ')[0]}',
                           style: GoogleFonts.karla(
-                              textStyle: TextStyle(
+                            textStyle: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
                             ),

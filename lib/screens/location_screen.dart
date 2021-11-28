@@ -9,11 +9,13 @@ class LocationScreen extends StatefulWidget {
   static const routeName = 'location-screen';
   final PlaceLocation initialLocation;
   final bool isSelecting;
+  final String location;
 
   LocationScreen(
       {this.initialLocation =
           const PlaceLocation(latitude: 20.5937, longitude: 78.9629),
-      this.isSelecting = false});
+      this.isSelecting = false,
+      this.location = ''});
 
   @override
   _LocationScreenState createState() => _LocationScreenState();
@@ -22,7 +24,7 @@ class LocationScreen extends StatefulWidget {
 class _LocationScreenState extends State<LocationScreen> {
   latLng.LatLng? _pickedLocation;
   final accessToken = dotenv.env['ACCESS_TOKEN'];
-  
+
   void _selectLocation(dynamic tapPosition, latLng.LatLng? position) {
     print(tapPosition);
     setState(() {
@@ -34,7 +36,7 @@ class _LocationScreenState extends State<LocationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Choose a Location'),
+        title: Text(widget.isSelecting ? 'Choose a Location' : widget.location),
         actions: [
           if (widget.isSelecting)
             IconButton(
@@ -53,7 +55,7 @@ class _LocationScreenState extends State<LocationScreen> {
             widget.initialLocation.latitude!,
             widget.initialLocation.longitude!,
           ),
-          zoom: widget.isSelecting ? 5.0: 13.0,
+          zoom: widget.isSelecting ? 5.0 : 13.0,
           onTap: widget.isSelecting ? _selectLocation : null,
         ),
         layers: [

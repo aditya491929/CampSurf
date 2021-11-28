@@ -205,7 +205,7 @@ class _AddCampScreenState extends State<AddCampScreen> {
                           Text(
                             '🏕️ Add New CampGround',
                             style: GoogleFonts.inter(
-                                textStyle: TextStyle(
+                              textStyle: TextStyle(
                                 fontSize: 27,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -218,7 +218,7 @@ class _AddCampScreenState extends State<AddCampScreen> {
                             decoration: InputDecoration(
                               labelText: 'Title',
                               labelStyle: GoogleFonts.lato(
-                                  textStyle: TextStyle(
+                                textStyle: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                 ),
@@ -257,7 +257,7 @@ class _AddCampScreenState extends State<AddCampScreen> {
                             decoration: InputDecoration(
                               labelText: 'Price',
                               labelStyle: GoogleFonts.lato(
-                                  textStyle: TextStyle(
+                                textStyle: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                 ),
@@ -294,7 +294,7 @@ class _AddCampScreenState extends State<AddCampScreen> {
                             decoration: InputDecoration(
                               labelText: 'Description',
                               labelStyle: GoogleFonts.lato(
-                                  textStyle: TextStyle(
+                                textStyle: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                 ),
@@ -354,6 +354,7 @@ class _AddCampScreenState extends State<AddCampScreen> {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
+                          color: Colors.black,
                         ),
                       ),
                     ],
@@ -372,7 +373,7 @@ class _AddCampScreenState extends State<AddCampScreen> {
           label: Text(
             "Add CampGround",
             style: GoogleFonts.inter(
-                textStyle: TextStyle(
+              textStyle: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),

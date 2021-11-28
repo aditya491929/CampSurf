@@ -35,8 +35,9 @@ class MainDrawer extends StatelessWidget {
           FutureBuilder(
             future: users.doc(user!.uid).get(),
             builder: (BuildContext ctx, snapShot) {
-              if (snapShot.connectionState == ConnectionState.done){
-                DocumentSnapshot<Object?> data = snapShot.data! as DocumentSnapshot;
+              if (snapShot.connectionState == ConnectionState.done) {
+                DocumentSnapshot<Object?> data =
+                    snapShot.data! as DocumentSnapshot;
                 return Container(
                   height: 150,
                   width: double.infinity,
@@ -46,7 +47,7 @@ class MainDrawer extends StatelessWidget {
                   child: Text(
                     'Hello, ${data["username"]}!',
                     style: GoogleFonts.lato(
-                        textStyle: TextStyle(
+                      textStyle: TextStyle(
                         color: Colors.white,
                         fontSize: 23,
                         fontWeight: FontWeight.normal,
@@ -83,12 +84,6 @@ class MainDrawer extends StatelessWidget {
           Divider(
             color: Colors.grey,
           ),
-          buildListTile('Favourites', Icons.favorite_outline_outlined, () {
-            Navigator.of(context).pushReplacementNamed('/favouriteCamps');
-          }),
-          Divider(
-            color: Colors.grey,
-          ),
           buildListTile('Your Listings', MdiIcons.tent, () {
             Navigator.of(context).pushReplacementNamed('/yourPosts');
           }),
@@ -97,7 +92,7 @@ class MainDrawer extends StatelessWidget {
           ),
           buildListTile('Logout', Icons.logout_outlined, () {
             FirebaseAuth.instance.signOut();
-            // Navigator.of(context).pushReplacementNamed('/');
+            Navigator.of(context).pushReplacementNamed('/');
           }),
           Divider(
             color: Colors.grey,

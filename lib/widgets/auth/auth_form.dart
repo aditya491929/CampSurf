@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AuthForm extends StatefulWidget {
-  AuthForm(this.submitFn,this.isLoading);
-  
+  AuthForm(this.submitFn, this.isLoading);
+
   final void Function(
     String email,
     String password,
     String username,
     bool isLogin,
   ) submitFn;
-  
+
   final bool isLoading;
 
   @override
@@ -31,12 +31,9 @@ class _AuthFormState extends State<AuthForm> {
 
     if (isValid) {
       _formKey.currentState!.save();
-      // print(_userEmail);
-      // print(_userName);
-      // print(_userPassword);
       widget.submitFn(
         _userEmail.trim(),
-        _userPassword.trim(), 
+        _userPassword.trim(),
         _userName.trim(),
         _isLogin,
       );
@@ -116,7 +113,7 @@ class _AuthFormState extends State<AuthForm> {
                       decoration: InputDecoration(
                         labelText: 'Email',
                         labelStyle: GoogleFonts.lato(
-                            textStyle: TextStyle(
+                          textStyle: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                           ),
@@ -183,10 +180,10 @@ class _AuthFormState extends State<AuthForm> {
                           labelText: 'Username',
                           labelStyle: GoogleFonts.lato(
                             textStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
                           ),
-                        ),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(
@@ -247,7 +244,7 @@ class _AuthFormState extends State<AuthForm> {
                       decoration: InputDecoration(
                         labelText: 'Password',
                         labelStyle: GoogleFonts.lato(
-                            textStyle: TextStyle(
+                          textStyle: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                           ),
@@ -336,7 +333,7 @@ class _AuthFormState extends State<AuthForm> {
                               child: Text(
                                 _isLogin ? 'Login' : 'SignUp',
                                 style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
+                                  textStyle: TextStyle(
                                     color: Color.fromRGBO(48, 48, 48, 1),
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
@@ -366,7 +363,7 @@ class _AuthFormState extends State<AuthForm> {
                             child: Text(
                               'SignUp',
                               style: GoogleFonts.inter(
-                                  textStyle: TextStyle(
+                                textStyle: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w600,
@@ -386,7 +383,7 @@ class _AuthFormState extends State<AuthForm> {
                         child: Text(
                           'Already have an Account?',
                           style: GoogleFonts.inter(
-                              textStyle: TextStyle(
+                            textStyle: TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
