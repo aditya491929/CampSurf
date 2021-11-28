@@ -10,7 +10,6 @@ import './screens/your_listings.dart';
 import './screens/edit_screen.dart';
 import './screens/camp_detail_screen.dart';
 import './helpers/custom_transition.dart';
-import './screens/splashScreen.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -37,9 +36,6 @@ class MyApp extends StatelessWidget {
         home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (ctx, userSnapshot) {
-            if (userSnapshot.connectionState == ConnectionState.waiting) {
-              return SplashScreen();
-            }
             if (userSnapshot.connectionState == ConnectionState.active) {
               if (userSnapshot.hasData) {
                 return TabsScreen();

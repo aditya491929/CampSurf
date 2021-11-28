@@ -68,17 +68,13 @@ class _TabsScreenState extends State<TabsScreen> {
             onTap: (index) {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               if (index == 1) {
-                print('$index $showFab');
                 setState(() {
                   showFab = false;
                 });
-                print(showFab);
               }else{
-                print('$index $showFab');
                 setState(() {
                   showFab = true;
                 });
-                print(showFab);
               }
             },
             indicatorColor: Theme.of(context).accentColor,

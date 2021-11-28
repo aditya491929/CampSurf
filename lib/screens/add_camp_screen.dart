@@ -85,7 +85,7 @@ class _AddCampScreenState extends State<AddCampScreen> {
           indexList.add(splitList[i].substring(0, j).toLowerCase());
         }
       }
-      print('Step 5');
+
       await FirebaseFirestore.instance.collection('camp-details').doc().set({
         'uid': user!.uid,
         'cid': newCamp.id,

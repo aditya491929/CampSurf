@@ -33,112 +33,122 @@ class _MapScreenState extends State<MapScreen> {
           padding: EdgeInsets.all(0),
           height: MediaQuery.of(context).size.height * 0.27,
           width: double.infinity,
-          child: Row(
+          child: Column(
             children: [
-              Container(
-                height: 180,
-                width: 200,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromRGBO(48, 48, 48, 1),
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    camp['image_url'],
-                    fit: BoxFit.cover,
-                    width: double.infinity,
+              Text(
+                camp['title'],
+                style: GoogleFonts.lato(
+                  textStyle: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
+                maxLines: 2,
+                overflow: TextOverflow.fade,
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.05,
+                height: 10,
               ),
-              Expanded(
-                child: ListView(
-                  children: [
-                    Text(
-                      camp['title'],
-                      style: GoogleFonts.lato(
-                        textStyle: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+              Row(
+                children: [
+                  Container(
+                    height: 180,
+                    width: 200,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Color.fromRGBO(48, 48, 48, 1),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        camp['image_url'],
+                        fit: BoxFit.cover,
+                        width: double.infinity,
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Price: ',
-                      style: GoogleFonts.karla(
-                        textStyle: TextStyle(
-                          fontSize: 20,
-                          color: Theme.of(context).accentColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Chip(
-                      labelPadding: const EdgeInsets.symmetric(
-                          vertical: 3, horizontal: 7),
-                      label: Text(
-                        '\$ ${camp['price']} / night',
-                        style: GoogleFonts.lato(
-                          textStyle: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.05,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        
+                        Text(
+                          'Price: ',
+                          style: GoogleFonts.karla(
+                            textStyle: TextStyle(
+                              fontSize: 20,
+                              color: Theme.of(context).accentColor,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                    Expanded(child: Text('')),
-                    ElevatedButton(
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        Navigator.of(context).pushNamed(
-                          CampDetail.routeName,
-                          arguments: {
-                            'id': campId,
-                            'title': camp['title'],
-                            'price': camp['price'],
-                            'description': camp['description'],
-                            'address': camp['address'],
-                            'latitude': camp['loc_lat'],
-                            'longitude': camp['loc_lng'],
-                            'imgUrl': camp['image_url'],
-                            'post_date': camp['cid'],
-                            'post_by': camp['uid']
+                        Chip(
+                          labelPadding: const EdgeInsets.symmetric(
+                              vertical: 3, horizontal: 7),
+                          label: Text(
+                            '\$ ${camp['price']} / night',
+                            style: GoogleFonts.lato(
+                              textStyle: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 3,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            Navigator.of(context).pushNamed(
+                              CampDetail.routeName,
+                              arguments: {
+                                'id': campId,
+                                'title': camp['title'],
+                                'price': camp['price'],
+                                'description': camp['description'],
+                                'address': camp['address'],
+                                'latitude': camp['loc_lat'],
+                                'longitude': camp['loc_lng'],
+                                'imgUrl': camp['image_url'],
+                                'post_date': camp['cid'],
+                                'post_by': camp['uid']
+                              },
+                            );
                           },
-                        );
-                      },
-                      child: Text(
-                        'More Info',
-                        style: GoogleFonts.karla(
-                          textStyle: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontWeight: FontWeight.bold,
+                          child: Text(
+                            'More Info',
+                            style: GoogleFonts.karla(
+                              textStyle: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.amber),
+                              shape:
+                                  MaterialStateProperty.all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                              ))),
                         ),
-                      ),
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.amber),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                          ))),
+                        SizedBox(
+                          height: 5,
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ],
           ),
