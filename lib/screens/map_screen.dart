@@ -48,23 +48,22 @@ class _MapScreenState extends State<MapScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    camp['image_url'], 
-                    fit: BoxFit.cover, 
+                    camp['image_url'],
+                    fit: BoxFit.cover,
                     width: double.infinity,
                   ),
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width*0.05,
+                width: MediaQuery.of(context).size.width * 0.05,
               ),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: ListView(
                   children: [
                     Text(
                       camp['title'],
-                      style: GoogleFonts.lato( 
-                          textStyle: TextStyle(
+                      style: GoogleFonts.lato(
+                        textStyle: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
@@ -77,7 +76,7 @@ class _MapScreenState extends State<MapScreen> {
                     Text(
                       'Price: ',
                       style: GoogleFonts.karla(
-                          textStyle: TextStyle(
+                        textStyle: TextStyle(
                           fontSize: 20,
                           color: Theme.of(context).accentColor,
                           fontWeight: FontWeight.bold,
@@ -90,7 +89,7 @@ class _MapScreenState extends State<MapScreen> {
                       label: Text(
                         '\$ ${camp['price']} / night',
                         style: GoogleFonts.lato(
-                            textStyle: TextStyle(
+                          textStyle: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
@@ -116,24 +115,24 @@ class _MapScreenState extends State<MapScreen> {
                             'post_by': camp['uid']
                           },
                         );
-                      }, 
+                      },
                       child: Text(
-                        'More Info', 
+                        'More Info',
                         style: GoogleFonts.karla(
-                            textStyle: TextStyle(
+                          textStyle: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.amber),
-                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.amber),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
-                          )
-                        )
-                      ),
+                          ))),
                     ),
                     SizedBox(
                       height: 5,

@@ -358,18 +358,6 @@ class _CampDetailState extends State<CampDetail> {
               ),
             ),
           ),
-          // SliverToBoxAdapter(
-          //   child: Padding(
-          //     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          //     child: ClipRRect(
-          //       borderRadius: BorderRadius.circular(10),
-          //       child: Container(
-          //         height: 400,
-          //         color: Colors.grey[600],
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );

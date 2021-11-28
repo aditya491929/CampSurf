@@ -76,16 +76,16 @@ class _AddCampScreenState extends State<AddCampScreen> {
       print('Step3');
 
       final user = FirebaseAuth.instance.currentUser;
-
+      print('Step 4');
       List<String> splitList = newCamp.title!.split(' ');
       List<String> indexList = [];
 
       for (int i = 0; i < splitList.length; i++) {
-        for (int j = 0; j < splitList[i].length + i; j++) {
+        for (int j = 0; j <= splitList[i].length; j++) {
           indexList.add(splitList[i].substring(0, j).toLowerCase());
         }
       }
-
+      print('Step 5');
       await FirebaseFirestore.instance.collection('camp-details').doc().set({
         'uid': user!.uid,
         'cid': newCamp.id,
@@ -116,6 +116,7 @@ class _AddCampScreenState extends State<AddCampScreen> {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       Navigator.of(context).pop();
     } catch (error) {
+      print(error);
       await showDialog(
         context: context,
         builder: (ctx) => AlertDialog(

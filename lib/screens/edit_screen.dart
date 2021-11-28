@@ -28,7 +28,7 @@ class _EditScreenState extends State<EditScreen> {
       List<String> indexList = [];
 
       for (int i = 0; i < splitList.length; i++) {
-        for (int j = 0; j < splitList[i].length + i; j++) {
+        for (int j = 0; j <= splitList[i].length; j++) {
           indexList.add(splitList[i].substring(0, j).toLowerCase());
         }
       }
@@ -134,7 +134,7 @@ class _EditScreenState extends State<EditScreen> {
                       decoration: InputDecoration(
                         labelText: 'Title',
                         labelStyle: GoogleFonts.lato(
-                            textStyle: TextStyle(
+                          textStyle: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                           ),
@@ -169,7 +169,7 @@ class _EditScreenState extends State<EditScreen> {
                       decoration: InputDecoration(
                         labelText: 'Price',
                         labelStyle: GoogleFonts.lato(
-                            textStyle: TextStyle(
+                          textStyle: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                           ),
@@ -206,7 +206,7 @@ class _EditScreenState extends State<EditScreen> {
                       decoration: InputDecoration(
                         labelText: 'Description',
                         labelStyle: GoogleFonts.lato(
-                            textStyle: TextStyle(
+                          textStyle: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                           ),

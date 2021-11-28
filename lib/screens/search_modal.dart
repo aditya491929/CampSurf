@@ -107,14 +107,15 @@ class _SearchModalState extends State<SearchModal> {
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          // itemCount: snapshot.data!.docs.length,
-                          itemCount: 4,
+                          itemCount: snapshot.data!.docs.length > 3
+                              ? 4
+                              : snapshot.data!.docs.length,
                           itemBuilder: (context, index) {
                             final camp = campDetails[index];
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: GestureDetector(
-                                onTap: (){
+                                onTap: () {
                                   Navigator.of(context).pushNamed(
                                     CampDetail.routeName,
                                     arguments: {
@@ -257,43 +258,6 @@ class _SearchModalState extends State<SearchModal> {
                       );
                   }
                 },
-                // child: GridView.builder(
-                //   physics: BouncingScrollPhysics(),
-                //   padding: const EdgeInsets.all(10),
-                //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                //     crossAxisCount: 2,
-                //     childAspectRatio: 2 / 2,
-                //     crossAxisSpacing: 10,
-                //     mainAxisSpacing: 10,
-                //   ),
-                //   itemCount: 10,
-                //   itemBuilder: (context, index) {
-                //     return ClipRRect(
-                //       borderRadius: BorderRadius.circular(10),
-                //       child: GestureDetector(
-                //         onTap: () {
-                //           Navigator.of(context).pushNamed(CampDetail.routeName);
-                //         },
-                //         child: GridTile(
-                //           child: Image.network(
-                //             'https://media.istockphoto.com/photos/shot-of-a-cute-vintage-teapot-in-a-campsite-near-to-lake-picture-id1305448692?b=1&k=20&m=1305448692&s=170667a&w=0&h=JIAAnIWgx2dwTi96Zn37rauFCRV11EBIPeTbwAjbpPc=',
-                //             fit: BoxFit.cover,
-                //           ),
-                //           footer: GridTileBar(
-                //             backgroundColor: Colors.black.withOpacity(0.84),
-                //             title: Text(
-                //               'Test ${index + 1}',
-                //               style: TextStyle(
-                //                 fontWeight: FontWeight.bold,
-                //                 fontSize: 17,
-                //               ),
-                //             ),
-                //           ),
-                //         ),
-                //       ),
-                //     );
-                //   },
-                // ),
               ),
             ),
           ],

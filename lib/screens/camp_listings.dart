@@ -125,7 +125,7 @@ class _CampListingsState extends State<CampListings> {
                                       ),
                                     ),
                                     subtitle: Text(
-                                      '${address1[3]}, ${address1[4]}',
+                                      '${address1[(address1.length) - 2]}, ${address1[(address1.length) - 1]}',
                                       style: GoogleFonts.karla(),
                                       overflow: TextOverflow.fade,
                                       maxLines: 1,
