@@ -31,7 +31,7 @@ class _MapScreenState extends State<MapScreen> {
         backgroundColor: Color.fromRGBO(40, 40, 40, 1),
         content: Container(
           padding: EdgeInsets.all(0),
-          height: MediaQuery.of(context).size.height * 0.27,
+          height: MediaQuery.of(context).size.height * 0.31,
           width: double.infinity,
           child: Column(
             children: [
@@ -53,7 +53,7 @@ class _MapScreenState extends State<MapScreen> {
               Row(
                 children: [
                   Container(
-                    height: 180,
+                    height: 170,
                     width: 200,
                     decoration: BoxDecoration(
                       border: Border.all(
