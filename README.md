@@ -16,33 +16,32 @@
 - Next we have the `\helper` folder which contains .dart files used for transitions and location services
 - The `\models` folder contains a single file used to mark campsites on the map
 - This is followed by the `\screens` folder which contains all the screens required for our app
-    - `add_camp_screen.dart` - adding a campsite
-    !(media\Screenshot_1639227243.png)
-    - `auth_screen.dart` - Login/Sign Up authentication
-    !(media\Screenshot_1639227194.png)
-    - `camp_detail_screen.dart` - shows details of campsites
-    !(media\Screenshot_1639227318.png)
-    - `camp_listings.dart` - shows the list of campsites
-    !(media\Screenshot_1639227240.png)
-    - `edit_screen.dart` - to edit a listing
-    !(media\Screenshot_1639227234.png)
-    - `location_screen.dart` - to mark location of campsite on a map
-    !(media\Screenshot_1639227273.png)
-    - `map_screen.dart` - shows a world map with markers on listed campsites
-    !(media\Screenshot_1639227260.png)
-    - `search_modal.dart` - displays search results
-    !(media\Screenshot_1639228797.png)
-    - `tabs_screen.dart` - home screen 
-    !(media\Screenshot_1639227240.png)
-    - `your_listings.dart` - shows campsites listed by user
-    !(media\Screenshot_1639227231.png)
+    - `add_camp_screen.dart` - adding a campsite  
+    - <img src="media\Screenshot_1639227243.png"  width="250" />
+    - `auth_screen.dart` - Login/Sign Up authentication  
+    - <img src="media\Screenshot_1639227194.png"  width="250" />
+    - `camp_detail_screen.dart` - shows details of campsites  
+    - <img src="media\Screenshot_1639227318.png"  width="250" />
+    - `camp_listings.dart` - shows the list of campsites  
+    - <img src="media\Screenshot_1639227240.png"  width="250" />
+    - `edit_screen.dart` - to edit a listing  
+    - <img src="media\Screenshot_1639227234.png"  width="250" />
+    - `location_screen.dart` - to mark location of campsite on a map  
+    - <img src="media\Screenshot_1639227273.png"  width="250" />
+    - `map_screen.dart` - shows a world map with markers on listed campsites  
+    - <img src="media\Screenshot_1639227260.png"  width="250" />
+    - `search_modal.dart` - displays search results  
+    - <img src="media\Screenshot_1639228797.png"  width="250" />
+    - `tabs_screen.dart` - home screen  
+    - <img src="media\Screenshot_1639227240.png"  width="250" />
+    - `your_listings.dart` - shows campsites listed by user  
+    - <img src="media\Screenshot_1639227231.png"  width="250" />
 
 - The `\widgets` folder contains widgets used in the app
-    - `\auth` folder contains the authentication form used for login and registration
-    !(media\Screenshot_1639227197.png)
-    !(media\Screenshot_1639227218.png)
-    - `\drawer` folder contains the widget for app drawer
-    !(media\Screenshot_1639227228.png)
+    - `\auth` folder contains the authentication form used for login and registration  
+    - <img src="media\Screenshot_1639227197.png"  width="250" />  <img src="media\Screenshot_1639227218.png"  width="250" />
+    - `\drawer` folder contains the widget for app drawer  
+    - <img src="media\Screenshot_1639227228.png"  width="250" />
     - `\newCamp` folder contains widgets for adding images and location of a new listing
 
 
